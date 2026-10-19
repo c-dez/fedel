@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://u6am372t24vy"]
+
+[ext_resource type="Script" uid="uid://d118lyokjcd2t" path="res://fireball/fireball.gd" id="1_n2s7r"]
+[ext_resource type="Script" uid="uid://c7js66w4h0arf" path="res://fireball/velocity_component.gd" id="2_ccdko"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ktebk"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gc2ye"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Fireball" type="Area3D" unique_id=1138711331]
+script = ExtResource("1_n2s7r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1438403040]
+mesh = SubResource("BoxMesh_ktebk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1879526385]
+shape = SubResource("BoxShape3D_gc2ye")
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=1733170527 node_paths=PackedStringArray("parent")]
+script = ExtResource("2_ccdko")
+parent = NodePath("..")
+speed = 20.0

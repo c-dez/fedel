@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://b4vhyvdcfahvc"]
+
+[ext_resource type="PackedScene" uid="uid://bpplupp6kx8ye" path="res://Player/player.tscn" id="1_ig7tw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktebk"]
+albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_latbv"]
+albedo_color = Color(1, 0.3372549, 0.41568628, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ktebk"]
+material = SubResource("StandardMaterial3D_latbv")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ig7tw"]
+
+[node name="Main" type="Node3D" unique_id=76870631]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1007501699]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1174734398]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1970355650]
+use_collision = true
+size = Vector3(1000, 1, 1000)
+material = SubResource("StandardMaterial3D_ktebk")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." unique_id=873849799 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1550364199]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=340019559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, -11)
+size = Vector3(10, 1, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1055767034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.543196, 4.669861, -11)
+size = Vector3(10, 8.339722, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=783839147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.44499, 4.669861, 11.750355)
+size = Vector3(5.803589, 8.339722, 9.475098)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1071275697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.855116, 6.2664347, 11.750355)
+size = Vector3(16.983337, 1.4110718, 9.475098)
+
+[node name="Dummy" type="CharacterBody3D" parent="." unique_id=662741425 groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.733295, 1.650886, -8.092065)
+collision_layer = 5
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Dummy" unique_id=1283465478]
+mesh = SubResource("CapsuleMesh_ktebk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy" unique_id=1560868982]
+shape = SubResource("CapsuleShape3D_ig7tw")
+
+[node name="Dummy2" type="CharacterBody3D" parent="." unique_id=1718476392 groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.437466, 1.5060787, -1.7329073)
+collision_layer = 5
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Dummy2" unique_id=9088589]
+mesh = SubResource("CapsuleMesh_ktebk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy2" unique_id=844838968]
+shape = SubResource("CapsuleShape3D_ig7tw")

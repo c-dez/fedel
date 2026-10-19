@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://bpplupp6kx8ye"]
+
+[ext_resource type="Script" uid="uid://dpa8j0lbrbhvl" path="res://Player/scripts/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://qmmvw6283vb7" path="res://Player/target_area/target_area.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://bxp0prwxs3065" path="res://Player/attacks/attack_manager.gd" id="5_fhl08"]
+[ext_resource type="Script" uid="uid://dmsfxtn7crr3f" path="res://Player/attacks/proyectile.gd" id="6_fhl08"]
+[ext_resource type="Script" uid="uid://ogb0r0urq7ug" path="res://Player/attacks/stomp.gd" id="7_00tjw"]
+[ext_resource type="Script" uid="uid://dc4rr8gxr87fn" path="res://Player/attacks/finisher.gd" id="7_vtle1"]
+[ext_resource type="Script" uid="uid://cd5x4gejdmofs" path="res://Player/attacks/charge.gd" id="8_apopc"]
+[ext_resource type="Script" uid="uid://whi6f7tlx2mr" path="res://Player/scripts/dodge.gd" id="8_od3ui"]
+[ext_resource type="Script" uid="uid://cluco1hb16lhr" path="res://Player/attacks/claws.gd" id="8_x3vf3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ktebk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_latbv"]
+albedo_color = Color(1, 0.39215687, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ktebk"]
+material = SubResource("StandardMaterial3D_latbv")
+size = Vector3(1, 1, 0.3310547)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ktebk"]
+margin = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ktebk"]
+size = Vector3(10, 9.671265, 18.620972)
+
+[node name="Player" type="CharacterBody3D" unique_id=873849799 groups=["player"]]
+script = ExtResource("1_l8h54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265757587]
+shape = SubResource("CapsuleShape3D_hvfyp")
+metadata/_edit_lock_ = true
+
+[node name="Skin" type="Node3D" parent="." unique_id=126926802]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="Mesh" type="MeshInstance3D" parent="Skin" unique_id=14726940]
+mesh = SubResource("CapsuleMesh_ktebk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin/Mesh" unique_id=657584417]
+transform = Transform3D(1, 0, 0, 0, 0.3067053, 0, 0, 0, 1, 0, 0.44711077, -0.33447266)
+mesh = SubResource("BoxMesh_ktebk")
+
+[node name="SpringArmPivot" type="Node3D" parent="." unique_id=219132310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1229923, 0)
+script = ExtResource("2_4ntmi")
+min_vertical_angle = -1.0471975511965976
+max_vertical_angle = 0.4363323129985824
+metadata/_edit_lock_ = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=306249843]
+shape = SubResource("SphereShape3D_ktebk")
+spring_length = 5.0
+
+[node name="SpringPos" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=203616059]
+unique_name_in_owner = true
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="SpringArmPivot" unique_id=186875610]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4101796)
+script = ExtResource("3_btcbx")
+lerp_power = 5.0
+
+[node name="TargetArea" type="Node3D" parent="." unique_id=1935637730 node_paths=PackedStringArray("spring_arm_pivot")]
+visible = false
+script = ExtResource("4_gwnis")
+spring_arm_pivot = NodePath("../SpringArmPivot")
+metadata/_edit_lock_ = true
+
+[node name="Area3D" type="Area3D" parent="TargetArea" unique_id=213175328]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetArea/Area3D" unique_id=1124363841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8190308, -9.892761)
+shape = SubResource("BoxShape3D_ktebk")
+
+[node name="AttackManager" type="Node3D" parent="." unique_id=76198094]
+script = ExtResource("5_fhl08")
+
+[node name="Proyectile" type="Node" parent="AttackManager" unique_id=433830205]
+script = ExtResource("6_fhl08")
+
+[node name="Stomp" type="Node" parent="AttackManager" unique_id=1200463259]
+script = ExtResource("7_00tjw")
+
+[node name="StompTimer" type="Timer" parent="AttackManager/Stomp" unique_id=569225371]
+one_shot = true
+
+[node name="StompResetTimer" type="Timer" parent="AttackManager/Stomp" unique_id=2144911326]
+one_shot = true
+
+[node name="Charge" type="Node" parent="AttackManager" unique_id=772311894]
+script = ExtResource("8_apopc")
+
+[node name="Claws" type="Node" parent="AttackManager" unique_id=723285457]
+script = ExtResource("8_x3vf3")
+
+[node name="Orbs" type="Node" parent="AttackManager" unique_id=1666579905]
+
+[node name="Finisher" type="Node" parent="AttackManager" unique_id=1504576753]
+script = ExtResource("7_vtle1")
+
+[node name="DodgeComponent" type="Node" parent="." unique_id=521493245]
+script = ExtResource("8_od3ui")
+
+[node name="DodgeTimer" type="Timer" parent="DodgeComponent" unique_id=2138738422]
+one_shot = true
+
+[node name="DebugLabel" type="Label" parent="." unique_id=1516170203]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
