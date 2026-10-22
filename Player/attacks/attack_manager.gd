@@ -6,9 +6,7 @@ class_name AttackManager
 ## Se rompe al moverse
 ## excepto al dodge
 
-var attack_nodes: Dictionary = {
-
-}
+var attack_nodes: Dictionary = {}
 enum ComboState {
 	NO_ATTACK,
 	ATTACKING,
@@ -32,23 +30,17 @@ var next_attack_requested: bool = false
 
 var is_attacking: bool = false
 
+
 func _ready() -> void:
 	set_attack_nodes()
 
 
-func _process(_delta: float) -> void:
-	rotation.y = spring_arm_pivot.rotation.y
+func _process(delta: float) -> void:
+	_set_rotation_y()
 
 	# input de player para ejecutar ataques
-	if Input.is_action_just_pressed('left_mouse'):
-		if combo_state == ComboState.CHARGE:
-			return
-		request_attack(_delta)
-	if Input.is_action_just_pressed('right_mouse'):
-		if combo_state == ComboState.STOMP:
-			combo_state = ComboState.CHARGE
-			# funciona hasta aqui
-			request_attack(_delta)
+	normal_attack_input(delta)
+	heavy_attack_input(delta)
 
 
 func _physics_process(_delta: float) -> void:
@@ -79,7 +71,7 @@ func request_attack(_delta: float) -> void:
 		#claws
 		if combo_state == ComboState.CLAWS:
 			next_attack_requested = true
-			combo_index +=1
+			combo_index += 1
 		
 
 ## Comienza ataque y decide que ataque ejecutar
@@ -137,7 +129,6 @@ func start_attack(index: int) -> void:
 	# 			attack_nodes['claws'].claws()
 
 
-
 func reset_combo() -> void:
 	combo_state = ComboState.NO_ATTACK
 	combo_index = 0
@@ -159,15 +150,15 @@ func reset_combo_move() -> void:
 		return
 
 
-## agrega los hijos de attaques a array attack_nodes[]	
+## agrega los hijos de attaques a dictionary attack_nodes{}	
 func set_attack_nodes() -> void:
 	for i in range(get_child_count()):
 		attack_nodes[str(get_child(i).name.to_lower())] = get_child(i)
 
 ## DEBUG 
-func debug_label()->void:
-	var label:Label = %DebugLabel
-	var text:String = 'no attack'
+func debug_label() -> void:
+	var label: Label = %DebugLabel
+	var text: String = 'no attack'
 	# NO_ATTACK,
 	# ATTACKING,
 	# STOMP,
@@ -178,7 +169,7 @@ func debug_label()->void:
 		0:
 			text = 'no attack'
 		1:
-			text =' attacking'
+			text = ' attacking'
 		2:
 			text = 'stomp'
 		3:
@@ -192,7 +183,7 @@ func debug_label()->void:
 
 
 ## checa el attack_time y la ventana de tiempo de attack_durations[] para decidir si  request_attack es valido
-func check_if_can_start_attack(delta:float)-> void:
+func check_if_can_start_attack(delta: float) -> void:
 	if combo_state == ComboState.NO_ATTACK:
 		return
 
@@ -203,3 +194,24 @@ func check_if_can_start_attack(delta:float)-> void:
 			start_attack(combo_index)
 
 	is_attacking = attack_time <= attack_durations[1] + 0.2 and attack_time > 0.0
+
+
+func _set_rotation_y() -> void:
+	rotation.y = spring_arm_pivot.rotation.y
+
+
+func normal_attack_input(delta: float) -> void:
+	if Input.is_action_just_pressed('left_mouse'):
+		# ignora si es state charge
+		if combo_state == ComboState.CHARGE:
+			return
+
+		request_attack(delta)
+
+
+func heavy_attack_input(delta: float) -> void:
+	if Input.is_action_just_pressed('right_mouse'):
+		# continua el combo de stomp a charge
+		if combo_state == ComboState.STOMP:
+			combo_state = ComboState.CHARGE
+			request_attack(delta)
