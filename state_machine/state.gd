@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-@onready var state_machine: StateMachine = get_parent()
+# @onready var state_machine: StateMachine = get_parent()
 
 signal change_state_to(current_state: State, new_state: String)
 
@@ -22,6 +22,6 @@ func exit() ->void:
 	pass
 
 
-# func change_state_to()->void:
-	#POR QUE LA TENGO?
-# 	pass
+func transition_to_state()->void:
+	
+	pass

@@ -4,13 +4,10 @@
 [ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="2_4ntmi"]
 [ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://qmmvw6283vb7" path="res://Player/target_area/target_area.gd" id="4_gwnis"]
-[ext_resource type="Script" uid="uid://bxp0prwxs3065" path="res://Player/attacks/attack_manager.gd" id="5_fhl08"]
-[ext_resource type="Script" uid="uid://dmsfxtn7crr3f" path="res://Player/attacks/proyectile.gd" id="6_fhl08"]
-[ext_resource type="Script" uid="uid://ogb0r0urq7ug" path="res://Player/attacks/stomp.gd" id="7_00tjw"]
-[ext_resource type="Script" uid="uid://dc4rr8gxr87fn" path="res://Player/attacks/finisher.gd" id="7_vtle1"]
-[ext_resource type="Script" uid="uid://cd5x4gejdmofs" path="res://Player/attacks/charge.gd" id="8_apopc"]
+[ext_resource type="Script" uid="uid://dvskwfg0et0df" path="res://state_machine/state_machine.gd" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://dcibmacockb42" path="res://Player/state_machine/states/idle.gd" id="7_00tjw"]
+[ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
 [ext_resource type="Script" uid="uid://whi6f7tlx2mr" path="res://Player/scripts/dodge.gd" id="8_od3ui"]
-[ext_resource type="Script" uid="uid://cluco1hb16lhr" path="res://Player/attacks/claws.gd" id="8_x3vf3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -82,32 +79,6 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8190308, -9.892761)
 shape = SubResource("BoxShape3D_ktebk")
 
-[node name="AttackManager" type="Node3D" parent="." unique_id=76198094]
-script = ExtResource("5_fhl08")
-
-[node name="Proyectile" type="Node" parent="AttackManager" unique_id=433830205]
-script = ExtResource("6_fhl08")
-
-[node name="Stomp" type="Node" parent="AttackManager" unique_id=1200463259]
-script = ExtResource("7_00tjw")
-
-[node name="StompTimer" type="Timer" parent="AttackManager/Stomp" unique_id=569225371]
-one_shot = true
-
-[node name="StompResetTimer" type="Timer" parent="AttackManager/Stomp" unique_id=2144911326]
-one_shot = true
-
-[node name="Charge" type="Node" parent="AttackManager" unique_id=772311894]
-script = ExtResource("8_apopc")
-
-[node name="Claws" type="Node" parent="AttackManager" unique_id=723285457]
-script = ExtResource("8_x3vf3")
-
-[node name="Orbs" type="Node" parent="AttackManager" unique_id=1666579905]
-
-[node name="Finisher" type="Node" parent="AttackManager" unique_id=1504576753]
-script = ExtResource("7_vtle1")
-
 [node name="DodgeComponent" type="Node" parent="." unique_id=521493245]
 script = ExtResource("8_od3ui")
 
@@ -118,3 +89,15 @@ one_shot = true
 unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=161325522]
+script = ExtResource("6_od3ui")
+metadata/_custom_type_script = "uid://dvskwfg0et0df"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1844404119]
+script = ExtResource("7_00tjw")
+metadata/_custom_type_script = "uid://bjhk7q5skhk76"
+
+[node name="Move" type="Node" parent="StateMachine" unique_id=70612700]
+script = ExtResource("8_00tjw")
+metadata/_custom_type_script = "uid://bjhk7q5skhk76"

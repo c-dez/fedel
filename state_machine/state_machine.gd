@@ -3,7 +3,7 @@ class_name StateMachine
 
 
 var current_state: State
-@onready var parent: Node3D = get_parent()
+# @onready var parent: Node3D = get_parent()
 # @onready var current_state:State = get_child(0)
 
 
@@ -12,8 +12,8 @@ var last_state: State
 
 
 func _ready() -> void:
-	_set_states_dictionary()
 	_set_current_state_at_ready()
+	_set_states_dictionary()
 
 
 func _process(delta: float) -> void:
@@ -46,4 +46,4 @@ func _set_states_dictionary() -> void:
 
 
 func _set_current_state_at_ready() -> void:
-	current_state = get_child(0).enter()
+	current_state = get_child(0)

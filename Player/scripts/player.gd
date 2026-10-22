@@ -18,7 +18,7 @@ var _jump_fall_gravity: float
 
 @onready var camera = %ThirdPersonCamera
 @onready var skin: Node3D = %Skin
-@onready var attack_manager :AttackManager = $AttackManager
+# @onready var attack_manager :AttackManager = $AttackManager
 @onready var dodge_component:Node = $DodgeComponent
 
 func _ready() -> void:
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	move( delta)
+	# move( delta)
 	jump()
 	gravity(delta)
 	move_and_slide()
@@ -39,19 +39,24 @@ func jump() -> void:
 
 			
 ## Regresa zero si attack_manager se encuentra atacando
+# func get_input() ->Vector2:
+# 	var input := Input.get_vector(
+# 		'left', 'right',
+# 		'up', 'down'
+# 	)
+
+# 	if attack_manager.is_attacking:
+# 		return Vector2.ZERO
+# 	# elif dodge_component.is_dodging:
+# 	# 	return Vector2.ZERO
+# 	else:
+# 		return input
 func get_input() ->Vector2:
 	var input := Input.get_vector(
 		'left', 'right',
 		'up', 'down'
 	)
-
-	if attack_manager.is_attacking:
-		return Vector2.ZERO
-	# elif dodge_component.is_dodging:
-	# 	return Vector2.ZERO
-	else:
-		return input
-
+	return input	
 
 func move(delta: float) -> void:
 	var input = get_input()
