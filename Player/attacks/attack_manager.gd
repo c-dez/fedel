@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	rotation.y = spring_arm_pivot.rotation.y
-	
+
 	# input de player para ejecutar ataques
 	if Input.is_action_just_pressed('left_mouse'):
 		if combo_state == ComboState.CHARGE:
@@ -52,23 +52,14 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	#DEBUG
 	debug_label()
 	reset_combo_move()
 
-	#--------------------------------
-	if combo_state == ComboState.NO_ATTACK:
-		return
-
-	attack_time += _delta
-
-	if attack_time >= attack_durations[1]: # TODO: ATTACK_DURATION[HARDCODE]
-		if next_attack_requested:
-			start_attack(combo_index)
-
-	is_attacking = attack_time <= attack_durations[1] + 0.2 and attack_time > 0.0
-	#--------------------------------
+	check_if_can_start_attack(_delta)
 
 
+## modifica var next_attack_requested:bool, 
 func request_attack(_delta: float) -> void:
 	if combo_state == ComboState.NO_ATTACK:
 		combo_state = ComboState.ATTACKING
@@ -91,7 +82,7 @@ func request_attack(_delta: float) -> void:
 			combo_index +=1
 		
 
-
+## Comienza ataque y decide que ataque ejecutar
 func start_attack(index: int) -> void:
 	combo_index = index
 	attack_time = 0.0
@@ -167,13 +158,13 @@ func reset_combo_move() -> void:
 	if owner.dodge_component.is_dodging:
 		return
 
-	
+
+## agrega los hijos de attaques a array attack_nodes[]	
 func set_attack_nodes() -> void:
 	for i in range(get_child_count()):
 		attack_nodes[str(get_child(i).name.to_lower())] = get_child(i)
 
-
-
+## DEBUG 
 func debug_label()->void:
 	var label:Label = %DebugLabel
 	var text:String = 'no attack'
@@ -198,3 +189,17 @@ func debug_label()->void:
 			text = 'orbs'
 			
 	label.text = text
+
+
+## checa el attack_time y la ventana de tiempo de attack_durations[] para decidir si  request_attack es valido
+func check_if_can_start_attack(delta:float)-> void:
+	if combo_state == ComboState.NO_ATTACK:
+		return
+
+	attack_time += delta
+
+	if attack_time >= attack_durations[1]: # TODO: ATTACK_DURATION[HARDCODE]
+		if next_attack_requested:
+			start_attack(combo_index)
+
+	is_attacking = attack_time <= attack_durations[1] + 0.2 and attack_time > 0.0
