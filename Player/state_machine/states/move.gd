@@ -14,6 +14,11 @@ func physics_process(_delta: float) -> void:
 		0.0,
 		input.y
 	)).normalized()
+	#Rotates toward camera
+	direction = direction.rotated(
+		Vector3.UP,
+		player.camera.global_rotation.y
+	)
 
 	if direction.length() > 0.0:
 		var target_velocity := direction * max_speed
@@ -29,9 +34,7 @@ func physics_process(_delta: float) -> void:
 			target_velocity.z,
 			_delta * acceleration
 			)
+
+		player.rotate_skin_towards_move_direction(direction, 10.0, _delta)
 	else:
-		# transition_to_state()
 		emit_signal('change_state_to', self, 'idle')
-
-
-# func transition_to_state()->void:

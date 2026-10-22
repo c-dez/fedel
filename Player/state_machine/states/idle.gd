@@ -2,7 +2,7 @@ extends State
 
 # Idle
 
-var deceleration:float = 10.0 # TODO referenciar desde player
+var deceleration:float = 70.0 # TODO referenciar desde player
 @onready var player : Player = owner
 
 func process(_delta: float) -> void:
@@ -26,3 +26,6 @@ func physics_process(_delta: float) -> void:
 func transition_to_state()->void:
 	if player.get_input().length() > 0.1:
 		emit_signal('change_state_to', self, 'move')
+
+	# if Input.is_action_just_pressed('jump') and player.is_on_floor():
+	# 	emit_signal('change_state_to', self, 'jump')

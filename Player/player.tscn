@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dcibmacockb42" path="res://Player/state_machine/states/idle.gd" id="7_00tjw"]
 [ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
 [ext_resource type="Script" uid="uid://whi6f7tlx2mr" path="res://Player/scripts/dodge.gd" id="8_od3ui"]
+[ext_resource type="Script" uid="uid://cq3orlx22w6c6" path="res://Player/state_machine/states/normal_attack.gd" id="9_00tjw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -100,4 +101,8 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 
 [node name="Move" type="Node" parent="StateMachine" unique_id=70612700]
 script = ExtResource("8_00tjw")
+metadata/_custom_type_script = "uid://bjhk7q5skhk76"
+
+[node name="NormalAttack" type="Node" parent="StateMachine" unique_id=489427180]
+script = ExtResource("9_00tjw")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
