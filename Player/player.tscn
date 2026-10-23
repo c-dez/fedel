@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="2_4ntmi"]
 [ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://qmmvw6283vb7" path="res://Player/target_area/target_area.gd" id="4_gwnis"]
-[ext_resource type="Script" uid="uid://dvskwfg0et0df" path="res://state_machine/state_machine.gd" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://mihungoqau0c" path="res://Player/state_machine/state_machine.gd" id="6_apopc"]
 [ext_resource type="Script" uid="uid://dcibmacockb42" path="res://Player/state_machine/states/idle.gd" id="7_00tjw"]
 [ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
 [ext_resource type="Script" uid="uid://whi6f7tlx2mr" path="res://Player/scripts/dodge.gd" id="8_od3ui"]
@@ -94,7 +94,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="StateMachine" type="Node" parent="." unique_id=161325522]
-script = ExtResource("6_od3ui")
+script = ExtResource("6_apopc")
 metadata/_custom_type_script = "uid://dvskwfg0et0df"
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1844404119]
