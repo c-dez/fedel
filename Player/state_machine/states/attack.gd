@@ -6,14 +6,11 @@ extends State
 var attacks_array: Array[BasicAttack] = []
 ## numero de ataque
 var attack_index: int = 0
-var is_attacking: bool = false
 var request_next_attack: bool = false
 var attack_time: float = 0 ## tiempo desde que empezo el ataque
 
-
 @onready var player: Player = owner
 @onready var sm: StateMachine = get_parent()
-# @onready var timer: Timer = Timer.new()
 
 
 func _ready() -> void:
@@ -48,8 +45,7 @@ func physics_process(_delta: float) -> void:
 		if request_next_attack:
 			start_attack()
 
-	if attack_time > attacks_array[0].attack_duration + 0.5:
-		emit_signal('change_state_to', self, 'recovery')
+	transition_to_recovery()
 	
 
 func request_attack() -> void:
@@ -69,3 +65,8 @@ func _set_attacks_array() -> void:
 		if get_child(i) is BasicAttack:
 			var child := get_child(i)
 			attacks_array.append(child)
+
+
+func transition_to_recovery()->void:
+	if attack_time > attacks_array[0].attack_duration + 0.5:
+		emit_signal('change_state_to', self, 'recovery')
