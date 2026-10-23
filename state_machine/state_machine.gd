@@ -41,7 +41,7 @@ func _set_states_dictionary() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
-			# TODO: connect child signal
+			
 			child.change_state_to.connect(on_state_change)
 
 

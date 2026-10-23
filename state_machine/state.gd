@@ -1,8 +1,7 @@
 extends Node
 class_name State
 
-# @onready var state_machine: StateMachine = get_parent()
-
+@warning_ignore("unused_signal")
 signal change_state_to(current_state: State, new_state: String)
 
 

@@ -101,12 +101,3 @@ func rotate_skin_towards_move_direction(direction: Vector3, weight: float, delta
 		target_angle,
 		delta * weight
 	)
-
-
-# func normal_attack() ->void:
-# 	if Input.is_action_just_pressed('left_mouse'):
-# 		pass
-
-# func heavy_attack() ->void:
-# 	if Input.is_action_just_pressed('right_mouse'):
-# 		pass
