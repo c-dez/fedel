@@ -1,17 +1,22 @@
 extends State
-
-# ATTACK state 
+class_name AttackState
+## ATTACK state 
 
 
 var attacks_array: Array[BasicAttack] = []
-## numero de ataque
-var attack_index: int = 0
+
 var request_next_attack: bool = false
 var attack_time: float = 0 ## tiempo desde que empezo el ataque
 
 @onready var player: Player = owner
 @onready var sm: StateMachine = get_parent()
 
+
+# test
+var normal_attack_index: int = 0
+var heavy_attack_index: int = 0
+
+var max_normal_attacks_index:int = 0
 
 func _ready() -> void:
 	_set_attacks_array()
@@ -28,9 +33,7 @@ func enter() -> void:
 	player.velocity.x = 0
 	player.velocity.z = 0
 
-	attacks_array[0].attack()
-	attack_index += 1
-	attack_time = 0.0
+	start_attack()
 
 
 func process(_delta: float) -> void:
@@ -41,7 +44,7 @@ func process(_delta: float) -> void:
 func physics_process(_delta: float) -> void:
 	attack_time += _delta
 
-	if attack_time >= attacks_array[0].attack_duration:
+	if attack_time >= attacks_array[normal_attack_index-1].attack_duration:
 		if request_next_attack:
 			start_attack()
 
@@ -54,10 +57,16 @@ func request_attack() -> void:
 
 
 func start_attack() -> void:
+	if normal_attack_index >= max_normal_attacks_index:
+		# attack_index = 0
+		normal_attack_index = 0
+		print('reset normal attack index')
+
 	attack_time = 0.0
-	attack_index += 1
-	attacks_array[0].attack()
+	attacks_array[normal_attack_index].attack()
 	request_next_attack = false
+	# attack_index += 1
+	normal_attack_index += 1
 
 
 func _set_attacks_array() -> void:
@@ -65,8 +74,9 @@ func _set_attacks_array() -> void:
 		if get_child(i) is BasicAttack:
 			var child := get_child(i)
 			attacks_array.append(child)
+			max_normal_attacks_index += 1
+ 
 
-
-func transition_to_recovery()->void:
+func transition_to_recovery() -> void:
 	if attack_time > attacks_array[0].attack_duration + 0.5:
 		emit_signal('change_state_to', self, 'recovery')

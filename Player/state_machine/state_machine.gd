@@ -8,7 +8,7 @@ func _process(_delta: float) -> void:
 	label.text = str(
 		'state: ', current_state.name,
 		
-		'\n attack index: ', states['attack'].attack_index,
+		'\n normal attack index: ', states['attack'].normal_attack_index,
 		
 		)
 	#----------------	
