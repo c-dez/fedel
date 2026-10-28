@@ -1,0 +1,181 @@
+# Documentación de arquitectura: sistema de estados y ataques
+
+## 1. Propósito
+
+El sistema de estados del jugador controla qué comportamiento se encuentra activo en cada momento. Cada estado representa una situación del personaje, como estar inactivo, moverse, atacar o recuperarse después de un ataque.
+
+El objetivo es separar las responsabilidades del personaje, de la máquina de estados y de los comportamientos concretos de cada ataque.
+
+El sistema debe permitir ampliar las acciones del jugador sin tener que convertir cada variante de ataque o cada combinación de golpes en un estado independiente de la máquina principal.
+
+## 2. StateMachine
+
+`StateMachine` es el controlador central de los estados del jugador.
+
+Sus responsabilidades son:
+
+- Mantener una referencia al estado actualmente activo.
+- Registrar los estados disponibles.
+- Delegar la actualización por fotograma y la actualización física al estado activo.
+- Recibir las solicitudes de transición emitidas por los estados.
+- Ejecutar el ciclo de salida del estado anterior y entrada al nuevo estado.
+- Conservar una referencia al estado anterior.
+
+La máquina de estados no necesita conocer los detalles internos de cada comportamiento. Su responsabilidad principal es administrar qué estado está activo y cuándo se producen las transiciones.
+
+### Ciclo de transición
+
+Cuando un estado solicita cambiar a otro:
+
+1. Se comprueba que la solicitud procede del estado activo.
+2. Se busca el estado de destino.
+3. Se ejecuta `exit()` en el estado actual.
+4. Se guarda el estado anterior.
+5. Se ejecuta `enter()` en el nuevo estado.
+6. Se actualiza la referencia al estado activo.
+
+Esta secuencia centraliza las transiciones y evita que cada estado tenga que administrar directamente el ciclo de vida de los demás.
+
+## 3. State
+
+`State` es la clase base de los estados de la máquina.
+
+Define una interfaz común para que la máquina pueda trabajar con distintos estados sin conocer su implementación particular.
+
+Los métodos principales son:
+
+- `enter()`: se ejecuta cuando el estado pasa a estar activo.
+- `exit()`: se ejecuta cuando el estado deja de estar activo.
+- `process(delta)`: permite realizar la lógica de actualización general.
+- `physics_process(delta)`: permite realizar la lógica relacionada con la actualización física.
+- `change_state_to`: señal utilizada para solicitar una transición a otro estado.
+
+Los estados concretos implementan únicamente el comportamiento que les corresponde.
+
+## 4. Attack: controlador del ciclo de ataque
+
+`Attack` representa el estado de la máquina principal encargado de controlar la ejecución de los ataques del jugador.
+
+No representa necesariamente un único golpe. Es el controlador que coordina los ataques individuales y administra el ciclo de ejecución.
+
+Sus responsabilidades son:
+
+- Mantener la colección de ataques disponibles.
+- Iniciar la ejecución de un ataque.
+- Llevar el registro del índice del ataque actual o del siguiente ataque de la secuencia.
+- Medir el tiempo transcurrido desde el inicio del ataque.
+- Recibir las entradas del jugador para solicitar la continuación de un combo.
+- Decidir cuándo puede iniciarse el siguiente golpe.
+- Determinar cuándo debe finalizar la fase de ataque y solicitar la transición a `Recovery`.
+
+El controlador consulta la duración definida por el ataque que se está ejecutando para gestionar el avance temporal del ciclo.
+
+De esta manera, la lógica que coordina la secuencia permanece separada de los detalles particulares de cada golpe.
+
+### Responsabilidad temporal
+
+Cada ataque define su propia duración mediante `attack_duration`.
+
+`Attack` utiliza ese valor para decidir cuándo se ha alcanzado el final del intervalo de ejecución del golpe y cuándo puede continuar el ciclo.
+
+La duración individual del ataque y la decisión de abandonar el estado `Attack` son conceptos relacionados, pero diferentes: el controlador administra el ciclo general y decide cuándo solicitar la transición a recuperación.
+
+### Entrada del jugador
+
+El estado `Attack` recibe la entrada destinada a continuar la secuencia de golpes.
+
+Una solicitud de continuación se registra mediante `request_next_attack`. El controlador decide posteriormente si corresponde iniciar otro ataque, según el tiempo transcurrido y las condiciones de la secuencia.
+
+Esto permite distinguir entre solicitar el siguiente golpe y ejecutarlo realmente.
+
+## 5. BasicAttack: comportamiento de un ataque individual
+
+`BasicAttack` representa un ataque concreto que puede ser ejecutado por el controlador `Attack`.
+
+Cada instancia puede tener sus propios parámetros y comportamiento.
+
+Actualmente define:
+
+- `attack_duration`: duración configurable del ataque.
+- `attack()`: método que inicia o ejecuta el comportamiento asociado a ese ataque.
+
+La intención es que los detalles particulares de cada golpe se definan en su propio script, en lugar de concentrarlos todos en el controlador `Attack`.
+
+En el futuro, un ataque individual podría incorporar comportamiento específico relacionado con su animación, daño, alcance, efectos u otras características.
+
+No es necesario que cada `BasicAttack` sea un estado de la máquina principal. En la arquitectura actual, los objetos de ataque son comportamientos que el estado `Attack` coordina.
+
+## 6. Recovery: recuperación después del ataque
+
+`Recovery` representa la fase posterior a la ejecución de un ataque.
+
+Su función dentro del ciclo de combate es separar la fase de ataque de la fase en la que el personaje vuelve a estar disponible para otras acciones.
+
+El estado `Attack` solicita la transición a `Recovery` cuando se cumple la condición temporal que tiene definida.
+
+La duración de la recuperación y las condiciones para abandonar ese estado pertenecen a la lógica de `Recovery`, según cómo se implemente dicho estado.
+
+## 7. Relación entre los componentes
+
+La relación general del sistema es la siguiente:
+
+- `StateMachine` administra los estados principales.
+- `State` define la interfaz común de esos estados.
+- `Attack` administra el ciclo de ejecución de los ataques.
+- `BasicAttack` define el comportamiento y los parámetros de un golpe individual.
+- `Recovery` administra la fase posterior al ataque.
+
+El flujo conceptual de un ataque es:
+
+1. El jugador solicita una acción de ataque.
+2. La máquina principal activa `Attack`.
+3. `Attack` inicia uno de los ataques disponibles.
+4. El ataque proporciona sus parámetros, incluida su duración.
+5. `Attack` administra el tiempo y las solicitudes de continuación.
+6. Si corresponde, el controlador inicia otro golpe.
+7. Cuando se cumple la condición de finalización del ciclo, `Attack` solicita el cambio a `Recovery`.
+
+## 8. Ampliación del sistema de combos
+
+La intención es poder ampliar el sistema para admitir ataques normales, ataques pesados y distintas combinaciones de entradas.
+
+Las combinaciones de ataques no tienen por qué convertirse en estados independientes de la máquina principal.
+
+El estado `Attack` puede seguir siendo responsable de controlar la ejecución, mientras que la selección del siguiente golpe puede evolucionar hacia un mecanismo que interprete las entradas y determine qué ataque corresponde ejecutar.
+
+Esto permite mantener separados tres problemas:
+
+1. Interpretar la secuencia de entradas del jugador.
+2. Seleccionar el ataque correspondiente.
+3. Ejecutar el ataque y administrar sus tiempos.
+
+Esta separación es una posibilidad de evolución del diseño, no una afirmación de que todo ese mecanismo ya esté implementado.
+
+## 9. Principios de diseño
+
+El sistema sigue estas ideas:
+
+- **Separación de responsabilidades:** la máquina administra estados; el controlador administra el ciclo de ataque; cada ataque define su comportamiento particular.
+- **Composición:** el estado `Attack` dispone de objetos de ataque que puede ejecutar.
+- **Configurabilidad:** la duración de cada ataque se puede ajustar por instancia.
+- **Extensibilidad:** se pueden incorporar nuevos ataques sin que cada uno tenga que convertirse en un estado principal.
+- **Transiciones centralizadas:** la máquina de estados controla el cambio entre estados principales.
+- **Evolución gradual:** el reconocimiento de combos puede ampliarse sin tener que rediseñar necesariamente toda la FSM.
+
+## 10. Aspectos pendientes de verificar
+
+Esta documentación describe la intención del diseño. Los siguientes puntos conviene contrastarlos con la implementación actual:
+
+- Si `attack_index` representa el ataque en ejecución o el siguiente ataque que debe seleccionarse.
+- Si el índice se utiliza realmente para seleccionar los ataques de la colección.
+- Si el tiempo de recuperación se mide desde el inicio del golpe o desde el final de su duración.
+- Si las solicitudes de continuación se aceptan únicamente durante una ventana temporal concreta.
+- Cómo se reinician los temporizadores y las solicitudes al entrar y salir de los estados.
+- Cómo se determina qué ataque corresponde a una secuencia de entradas normales y pesadas.
+- Qué sucede cuando una secuencia termina, una entrada llega demasiado pronto o el jugador deja de introducir comandos.
+
+Estos puntos son oportunidades para revisar la coherencia entre el diseño previsto y el comportamiento real, no necesariamente defectos de la arquitectura.
+
+---
+
+**Idea central:** la máquina de estados controla el flujo general del personaje; `Attack` coordina el ciclo de combate; y `BasicAttack` encapsula cada golpe individual. La intención es poder ampliar el sistema de combate sin mezclar esas responsabilidades.

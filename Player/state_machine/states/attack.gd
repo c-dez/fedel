@@ -15,7 +15,7 @@ var attack_time: float = 0 ## tiempo desde que empezo el ataque
 
 func _ready() -> void:
 	_set_attacks_array()
-	
+
 
 func _process(_delta: float) -> void:
 	if sm.current_state != self:

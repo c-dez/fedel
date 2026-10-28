@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 	jump()
 	gravity(delta)
 	move_and_slide()
+
 	
 	
 func jump() -> void:
@@ -38,19 +39,6 @@ func jump() -> void:
 			velocity.y = _jump_velocity
 
 			
-## Regresa zero si attack_manager se encuentra atacando
-# func get_input() ->Vector2:
-# 	var input := Input.get_vector(
-# 		'left', 'right',
-# 		'up', 'down'
-# 	)
-
-# 	if attack_manager.is_attacking:
-# 		return Vector2.ZERO
-# 	# elif dodge_component.is_dodging:
-# 	# 	return Vector2.ZERO
-# 	else:
-# 		return input
 func get_input() ->Vector2:
 	var input := Input.get_vector(
 		'left', 'right',

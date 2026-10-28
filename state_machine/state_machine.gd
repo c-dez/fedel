@@ -1,6 +1,6 @@
 extends Node
 class_name StateMachine
-
+# Documentacion res://DOCS/sistema_de_estados_y_attaques.txt
 
 var current_state: State
 var states: Dictionary = {}
@@ -44,3 +44,6 @@ func _set_states_dictionary() -> void:
 
 func _set_current_state_at_ready() -> void:
 	current_state = get_child(0)
+
+
+
