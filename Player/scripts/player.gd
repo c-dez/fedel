@@ -18,8 +18,6 @@ var _jump_fall_gravity: float
 
 @onready var camera = %ThirdPersonCamera
 @onready var skin: Node3D = %Skin
-# @onready var attack_manager :AttackManager = $AttackManager
-@onready var dodge_component:Node = $DodgeComponent
 
 func _ready() -> void:
 	calculate_gravity()

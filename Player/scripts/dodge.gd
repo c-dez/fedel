@@ -14,13 +14,13 @@ func _ready() -> void:
 	dodge_timer.connect('timeout', _on_dodge_timer_timeout)
 	pass
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed('dodge'):
-		request_dodge()
+# func _process(_delta: float) -> void:
+# 	if Input.is_action_just_pressed('dodge'):
+# 		request_dodge()
 
 
-func _physics_process(delta: float) -> void:
-	dodge(delta)
+# func _physics_process(delta: float) -> void:
+# 	dodge(delta)
 
 	
 func request_dodge() -> void:
