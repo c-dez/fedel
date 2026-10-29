@@ -36,5 +36,4 @@ func on_timer_timeout() -> void:
 
 func reset_attack_index() -> void:
 	sm.states['attack'].normal_attack_index = 0
-	sm.states['attack'].combo_state = 0
-
+	sm.states['heavyattack'].heavy_attack_index = 0

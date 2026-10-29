@@ -8,8 +8,8 @@ class_name BasicAttack
 ## attack form script
 func attack()->void:
 	print(self.name, ' from script')
-	print(get_parent().combo_state,' combo state \n',
-	get_parent().normal_attack_index, ' normal attack index')
+	# print(get_parent().combo_state,' combo state \n',
+	# get_parent().normal_attack_index, ' normal attack index')
 
 	
 

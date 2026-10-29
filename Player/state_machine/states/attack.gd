@@ -14,16 +14,20 @@ var request_next_attack: bool = false # Indica si el jugador presionó ataque mi
 var attack_time: float = 0 ## Tiempo transcurrido desde que comenzó el ataque actual
 
 # --- Referencias ---
-@onready var player: Player = owner # Referencia al jugador actual
-@onready var sm: StateMachine = get_parent() # Referencia a la máquina de estados del jugador
+@onready var player: Player = owner 
+@onready var sm: StateMachine = get_parent() 
+
+@onready var heavy_attack_state:HeavyAttackState = sm.get_node('HeavyAttack')
 
 # --- Índices de Combos ---
 var normal_attack_index: int = 0 # Índice del ataque actual en la secuencia de combo
 var heavy_attack_index: int = 0  # Índice del ataque pesado (no utilizado en el script)
 var max_normal_attacks_index:int = 0 # Total de ataques disponibles en el combo normal
+# var combo_state:int = 0
 
 
-@onready var heavy = $HeavyAttacks
+
+# @onready var heavy = $HeavyAttack
 
 func _ready() -> void:
 	# Inicializa el array de ataques buscando a los hijos del nodo
@@ -52,9 +56,9 @@ func process(_delta: float) -> void:
 	# Detecta si el jugador intenta hacer un combo (presionar mouse durante el ataque)
 	if Input.is_action_just_pressed('left_mouse'):
 		request_attack()
-	if Input.is_action_just_pressed('right_mouse'):
-		### finisher
-		heavy.attack(combo_state)
+	# if Input.is_action_just_pressed('right_mouse'):
+	# 	### finisher
+	# 	heavy.attack(combo_state)
 
 
 
@@ -76,12 +80,12 @@ func request_attack() -> void:
 	if attack_time > 0.2:
 		request_next_attack = true
 
-var combo_state:int = 0
+
 func start_attack() -> void:
 	# Si llegamos al final de la cadena de ataques, reiniciamos al primer ataque
 	if normal_attack_index >= max_normal_attacks_index:
 		normal_attack_index = 0
-		combo_state = 0
+		# combo_state = 0
 
 	attack_time = 0.0
 	# Ejecuta la lógica específica del ataque actual (animación, daño, etc.)
@@ -89,15 +93,18 @@ func start_attack() -> void:
 	match normal_attack_index:
 		0:
 			attacks_array[normal_attack_index].attack()
-			combo_state = 1
+			# combo_state = 1
 			normal_attack_index += 1
 		1:
 			attacks_array[normal_attack_index].attack()
-			combo_state = 2
+			# combo_state = 2
 			normal_attack_index += 1
 		2:
 			attacks_array[1].attack()
-			combo_state = 3
+			# combo_state = 3
+			normal_attack_index += 1
+		3:
+			attacks_array[1].attack()
 			normal_attack_index += 1
 			
 	request_next_attack = false
