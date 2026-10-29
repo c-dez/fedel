@@ -2,6 +2,9 @@ extends State
 class_name AttackState
 ## Estado que gestiona la lógica de ataques y combos del jugador.
 
+# res://docs/explicacion de attack.txt
+
+
 # --- Variables de Datos ---
 # Array que contiene todas las acciones de ataque definidas como hijos de este nodo
 var attacks_array: Array[BasicAttack] = []

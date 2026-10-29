@@ -1,0 +1,29 @@
+Resumen de la Clase AttackState en Player/state_machine/states/attack.gd
+
+Descripción: La clase AttackState gestiona la lógica de ataques y combos del jugador en el juego.
+
+Variables de Datos:
+
+attacks_array: Array que contiene todas las acciones de ataque definidas como hijos de este nodo.
+request_next_attack: Booleano que indica si el jugador presionó ataque mientras estaba en medio de una animación.
+attack_time: Tiempo transcurrido desde que comenzó el ataque actual.
+Referencias:
+
+player: Referencia al jugador actual.
+sm: Referencia a la máquina de estados del jugador.
+Índices de Combos:
+
+normal_attack_index: Índice del ataque actual en la secuencia de combo.
+heavy_attack_index: Reservado para ataques pesados (no utilizado en el script).
+max_normal_attacks_index: Total de ataques disponibles en el combo normal.
+Funciones:
+
+_ready(): Inicializa el array de ataques buscando a los hijos del nodo.
+_process(_delta: float): Detecta si el jugador intenta hacer un combo (presionar mouse durante el ataque).
+enter(): Detiene el movimiento del jugador al empezar a atacar y inicia la primera acción del combo.
+process(_delta: float): Actualiza el tiempo de ataque y gestiona la petición de combos.
+physics_process(_delta: float): Verifica si el ataque actual terminó y si hay una petición de combo pendiente.
+request_attack(): Permite pedir el siguiente ataque si ha pasado un tiempo mínimo (evita spam instantáneo).
+start_attack(): Ejecuta la lógica específica del ataque actual.
+_set_attacks_array(): Escanea los nodos hijos para llenar la lista de ataques automáticamente.
+transition_to_recovery(): Transición automática al estado de recuperación después de que termine la duración del ataque base más un margen de tiempo.
