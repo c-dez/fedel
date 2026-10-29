@@ -1,8 +1,8 @@
 extends CharacterBody3D
 class_name Player
 
-## descripcion pendiente
-
+## Clase que controla el comportamiento del jugador en el juego 3D.
+## Proporciona funcionalidades para el movimiento, salto, gravedad y rotación del personaje.
 @export_category('Movement')
 @export var max_speed: float = 10.0
 @export var acceleration: float = 50.0

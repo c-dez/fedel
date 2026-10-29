@@ -36,7 +36,7 @@ func enter() -> void:
 	# Detiene el movimiento del jugador al empezar a atacar
 	player.velocity.x = 0
 	player.velocity.z = 0
-
+	
 	# Inicia la primera acción del combo
 	start_attack()
 
