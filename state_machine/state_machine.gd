@@ -1,6 +1,6 @@
 extends Node
 class_name StateMachine
-# Documentacion res://DOCS/sistema_de_estados_y_attaques.txt
+# Documentacion res://docs/sistema_de_estados_y_attaques.txt
 
 var current_state: State
 var states: Dictionary = {}

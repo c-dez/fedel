@@ -1,4 +1,4 @@
 extends BasicAttack
 
-func attack()->void:
-	print(self.name)
+# func attack()->void:
+# 	print(self.name)
