@@ -54,6 +54,7 @@ mesh = SubResource("BoxMesh_ktebk")
 [node name="SpringArmPivot" type="Node3D" parent="." unique_id=219132310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1229923, 0)
 script = ExtResource("2_4ntmi")
+joy_sens = 3.5
 min_vertical_angle = -1.0471975511965976
 max_vertical_angle = 0.4363323129985824
 metadata/_edit_lock_ = true
