@@ -98,11 +98,11 @@ func start_attack() -> void:
 			# combo_state = 2
 			normal_attack_index += 1
 		2:
-			attacks_array[1].attack()
+			attacks_array[normal_attack_index].attack()
 			# combo_state = 3
 			normal_attack_index += 1
 		3:
-			attacks_array[1].attack()
+			attacks_array[normal_attack_index].attack()
 			normal_attack_index += 1
 			
 	request_next_attack = false
