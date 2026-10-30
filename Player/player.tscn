@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bebwvh1isrclx" path="res://Player/attacks/basic_attack.gd" id="11_p5o4e"]
 [ext_resource type="Script" uid="uid://fy8ptwo2glma" path="res://Player/state_machine/states/dodge.gd" id="12_5htga"]
 [ext_resource type="Script" uid="uid://bj0ax5m1xer2t" path="res://Player/state_machine/states/heavy_attack.gd" id="13_dkpta"]
+[ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -132,3 +133,7 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 
 [node name="DodgeTimer" type="Timer" parent="StateMachine/Dodge" unique_id=2136894810]
 one_shot = true
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1665414175]
+script = ExtResource("15_dkpta")
+metadata/_custom_type_script = "uid://bjhk7q5skhk76"

@@ -37,4 +37,5 @@ func physics_process(_delta: float) -> void:
 
 		player.rotate_skin_towards_move_direction(direction, 10.0, _delta)
 	else:
+		# Change state to idle
 		emit_signal('change_state_to', self, 'idle')
