@@ -21,4 +21,4 @@ shape = SubResource("BoxShape3D_gc2ye")
 [node name="VelocityComponent" type="Node" parent="." unique_id=1733170527 node_paths=PackedStringArray("parent")]
 script = ExtResource("2_ccdko")
 parent = NodePath("..")
-speed = 20.0
+speed = 25.0

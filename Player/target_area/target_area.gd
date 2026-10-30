@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 ## Toggle de target lock
 func set_current_target() -> void:
 	# targeting = true
-	if Input.is_action_just_pressed('action'):
+	if Input.is_action_just_pressed('targeting'):
 		if targets_list.is_empty():
 			current_target = null
 			targeting = false
