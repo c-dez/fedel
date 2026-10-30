@@ -2,14 +2,19 @@ extends Node
 class_name BasicAttack
 
 
-@export var attack_duration:float = 1.0
+@export var attack_duration:float = 0.2
 
+@onready var fireball :PackedScene = preload('/home/gato/Documents/godot/fedel/fireball/fireball.tscn')
+
+@onready var attack_state:AttackState = get_parent()
 
 ## attack form script
 func attack()->void:
-	print(self.name, ' from script')
-	# print(get_parent().combo_state,' combo state \n',
-	# get_parent().normal_attack_index, ' normal attack index')
+	# print(self.name, ' from base script')
+	var f :FireBall= fireball.instantiate()
+	attack_state.sm.muzzle.add_child(f)
+	f.current_target = %TargetArea.current_target
+
 
 	
 

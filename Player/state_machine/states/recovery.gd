@@ -1,7 +1,7 @@
 extends State
 
 var attack_index: int = 0
-var timer_duration: float = 1.0
+var timer_duration: float = 0.3
 @onready var sm: StateMachine = get_parent()
 @onready var timer: Timer = Timer.new()
 @onready var player: Player = owner

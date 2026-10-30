@@ -1,5 +1,7 @@
 extends StateMachine
 
+@onready var muzzle :Node3D = owner.get_node('Muzzle')
+
 
 func _process(_delta: float) -> void:
 	super._process(_delta)

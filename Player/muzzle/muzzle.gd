@@ -1,7 +1,6 @@
 extends Node3D
 
-
-
-func _physics_process(delta: float) -> void:
-	var spring = %Skin
-	rotation.y = spring.rotation.y
+# TODO: es temporal esta solucion
+func _physics_process(_delta: float) -> void:
+	var skin: Node3D = %Skin
+	rotation.y = skin.rotation.y

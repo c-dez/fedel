@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _on_body_entered(body:Node3D)->void:
 	if body.is_in_group('enemy'):
-		# print(body.name)
+		print('firebal: ',body.name)
 		# print('target ', current_target.name)
 
 		call_deferred('queue_free')

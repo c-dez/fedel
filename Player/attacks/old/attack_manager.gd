@@ -1,5 +1,5 @@
 extends Node3D
-class_name AttackManager
+# class_name AttackManager
 
 
 ##Combo no se rompe por pasar tiempo sin input

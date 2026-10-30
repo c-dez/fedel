@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://fy8ptwo2glma" path="res://Player/state_machine/states/dodge.gd" id="12_5htga"]
 [ext_resource type="Script" uid="uid://bj0ax5m1xer2t" path="res://Player/state_machine/states/heavy_attack.gd" id="13_dkpta"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
+[ext_resource type="Script" uid="uid://dxp52ofg83x2l" path="res://Player/muzzle/muzzle.gd" id="16_lfmf2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -73,6 +74,7 @@ script = ExtResource("3_btcbx")
 lerp_power = 5.0
 
 [node name="TargetArea" type="Node3D" parent="." unique_id=1935637730 node_paths=PackedStringArray("spring_arm_pivot")]
+unique_name_in_owner = true
 visible = false
 script = ExtResource("4_gwnis")
 spring_arm_pivot = NodePath("../SpringArmPivot")
@@ -138,3 +140,6 @@ one_shot = true
 [node name="Jump" type="Node" parent="StateMachine" unique_id=1665414175]
 script = ExtResource("15_dkpta")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
+
+[node name="Muzzle" type="Node3D" parent="." unique_id=1474674402]
+script = ExtResource("16_lfmf2")
