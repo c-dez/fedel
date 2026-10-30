@@ -19,29 +19,46 @@ var _jump_fall_gravity: float
 @onready var camera = %ThirdPersonCamera
 @onready var skin: Node3D = %Skin
 
+# var coyote_time: float = 0.2
+# var _coyote_timer: float = 0.0
+
 
 func _ready() -> void:
 	_calculate_gravity()
 
 
 func _physics_process(delta: float) -> void:
-	jump()
+	# jump()
 	gravity(delta)
+	# coyote_time_timer(delta)
 	move_and_slide()
-	
-	
-func jump() -> void:
-	if is_on_floor():
-		if Input.is_action_just_pressed('jump'):
-			velocity.y = _jump_velocity
 
-			
-func get_input() ->Vector2:
+
+
+	
+	
+# func jump() -> void:
+# 	# if is_on_floor():
+# 	# 	if Input.is_action_just_pressed('jump'):
+# 	# 		velocity.y = _jump_velocity
+# 	if Input.is_action_just_pressed('jump'):
+# 		if _coyote_timer <= coyote_time :
+# 			velocity.y = _jump_velocity
+# 			_coyote_timer = 0.0
+
+
+# func coyote_time_timer(delta:float) ->void:
+# 	if not is_on_floor():
+# 		_coyote_timer += delta
+# 	else:
+# 		_coyote_timer = 0.0
+
+func get_input() -> Vector2:
 	var input := Input.get_vector(
 		'left', 'right',
 		'up', 'down'
 	)
-	return input	
+	return input
 
 
 func gravity(delta: float) -> void:

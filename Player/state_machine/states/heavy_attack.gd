@@ -88,4 +88,3 @@ func set_heavy_attack_index(index: int = 0) -> void:
 func transition_to_recovery() -> void:
 	if attack_time > heavy_attack_duration + 0.5:
 		emit_signal('change_state_to', self, 'recovery')
-
