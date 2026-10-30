@@ -75,6 +75,7 @@ lerp_power = 5.0
 
 [node name="TargetArea" type="Node3D" parent="." unique_id=1935637730 node_paths=PackedStringArray("spring_arm_pivot")]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("4_gwnis")
 spring_arm_pivot = NodePath("../SpringArmPivot")
 metadata/_edit_lock_ = true
