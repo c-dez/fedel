@@ -37,7 +37,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Si no estamos en estado de ataque, escuchamos el input para entrar en él
 	if sm.current_state != self:
-		if Input.is_action_just_pressed('left_mouse'):
+		if Input.is_action_just_pressed('attack'):
 			if player.is_on_floor():
 				# Solicita cambio al estado de ataque
 				emit_signal('change_state_to', sm.current_state, 'attack')
@@ -54,11 +54,9 @@ func enter() -> void:
 
 func process(_delta: float) -> void:
 	# Detecta si el jugador intenta hacer un combo (presionar mouse durante el ataque)
-	if Input.is_action_just_pressed('left_mouse'):
+	if Input.is_action_just_pressed('attack'):
 		request_attack()
-	# if Input.is_action_just_pressed('right_mouse'):
-	# 	### finisher
-	# 	heavy.attack(combo_state)
+	
 
 
 

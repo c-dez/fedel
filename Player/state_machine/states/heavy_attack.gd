@@ -16,7 +16,7 @@ var heavy_attack_index: int = 0
 
 func _process(_delta: float) -> void:
 	if sm.current_state != self:
-		if Input.is_action_just_pressed('right_mouse'):
+		if Input.is_action_just_pressed('heavy_attack'):
 			if player.is_on_floor():
 				emit_signal('change_state_to', sm.current_state, self.name.to_lower())
 
@@ -29,7 +29,7 @@ func enter() -> void:
 
 
 func process(_delta: float) -> void:
-	if Input.is_action_just_pressed('right_mouse'):
+	if Input.is_action_just_pressed('heavy_attack'):
 		request_attack()
 
 

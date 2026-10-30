@@ -201,7 +201,7 @@ func _set_rotation_y() -> void:
 
 
 func normal_attack_input(delta: float) -> void:
-	if Input.is_action_just_pressed('left_mouse'):
+	if Input.is_action_just_pressed('attack'):
 		# ignora si es state charge
 		if combo_state == ComboState.CHARGE:
 			return
@@ -210,7 +210,7 @@ func normal_attack_input(delta: float) -> void:
 
 
 func heavy_attack_input(delta: float) -> void:
-	if Input.is_action_just_pressed('right_mouse'):
+	if Input.is_action_just_pressed('heavy_attack'):
 		# continua el combo de stomp a charge
 		if combo_state == ComboState.STOMP:
 			combo_state = ComboState.CHARGE
