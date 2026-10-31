@@ -21,7 +21,7 @@ var attack_time: float = 0 ## Tiempo transcurrido desde que comenzó el ataque a
 
 # --- Índices de Combos ---
 var normal_attack_index: int = 0 # Índice del ataque actual en la secuencia de combo
-var heavy_attack_index: int = 0  # Índice del ataque pesado (no utilizado en el script)
+# var heavy_attack_index: int = 0  # Índice del ataque pesado (no utilizado en el script)
 var max_normal_attacks_index:int = 0 # Total de ataques disponibles en el combo normal
 # var combo_state:int = 0
 
