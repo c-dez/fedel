@@ -59,6 +59,7 @@ func match_heavy_attack() -> void:
 
 
 func _add_normal_attakcs_states_to_states_dic() -> void:
+	## Nodo solo usado para organizar
 	var normal_attacks_states_node: Node = get_node('NormalAttacksStates')
 
 	for child in normal_attacks_states_node.get_children():
