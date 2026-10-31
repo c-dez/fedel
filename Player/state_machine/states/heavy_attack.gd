@@ -6,14 +6,17 @@ class_name HeavyAttackState
 ## El estado se transita a la fase de recupero una vez que se completa la secuencia de ataques.
 var request_next_attack: bool = false
 var attack_time: float = 0
-var heavy_attack_duration: float = 1.5
+var heavy_attack_duration: float = 1.0
 var heavy_attack_index: int = 0
 
 @onready var sm: StateMachine = get_parent()
 @onready var attack_state: AttackState = sm.get_node('Attack')
 @onready var player: Player = owner
 
+func _ready() -> void:
+	_set_attacks_dic()
 
+	
 func _process(_delta: float) -> void:
 	if sm.current_state != self:
 		if Input.is_action_just_pressed('heavy_attack'):
@@ -53,26 +56,32 @@ func start_attack() -> void:
 	if heavy_attack_index == 0:
 		if attack_state.normal_attack_index == 0:
 			print('heavy 0')
+
 		elif attack_state.normal_attack_index == 1:
-			# x, y ... reset
-			print('heavy 1')
+			# x, y ... reset quick aoe
+			print('quick aoe')
 			set_normal_attack_index()
 			
 		elif attack_state.normal_attack_index == 2:
-			# x, x, y .... puede continuar y
-			print('heavy 2')
-			set_heavy_attack_index(+1)
+			# x,x,y, .... aoe
+			print('aoe')
+			set_normal_attack_index()
 			
 		elif attack_state.normal_attack_index == 3:
 			# x, x, x, y ... reset
-			print('heavy 3')
-			set_normal_attack_index()
+			# x,x,x,y,
+			attacks_dic['stomp'].attack()
+			print('stomp 1')	
+			set_heavy_attack_index(+1)
 
+	# elif heavy_attack_index == 1:
+	# 	# x, x, y, y .... repite
+	# 	attacks_dic['stomp'].heavy_attack()
 	elif heavy_attack_index == 1:
-		# x, x, y, y .... repite
-		print('heavy 1 + ', heavy_attack_index)
-		# set_normal_attack_index()
-		# set_heavy_attack_index()
+		#x,x,y,y
+		attacks_dic['stomp'].attack()
+		print('stomp repetido')
+
 
 	request_next_attack = false
 
@@ -88,3 +97,10 @@ func set_heavy_attack_index(index: int = 0) -> void:
 func transition_to_recovery() -> void:
 	if attack_time > heavy_attack_duration + 0.5:
 		emit_signal('change_state_to', self, 'recovery')
+
+
+var attacks_dic: Dictionary = {}
+func _set_attacks_dic() -> void:
+	for child in get_children():
+		if child is BasicHeavyAttack:
+			attacks_dic[child.name.to_lower()] = child

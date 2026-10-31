@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bebwvh1isrclx" path="res://Player/attacks/basic_attack.gd" id="11_p5o4e"]
 [ext_resource type="Script" uid="uid://fy8ptwo2glma" path="res://Player/state_machine/states/dodge.gd" id="12_5htga"]
 [ext_resource type="Script" uid="uid://bj0ax5m1xer2t" path="res://Player/state_machine/states/heavy_attack.gd" id="13_dkpta"]
+[ext_resource type="Script" uid="uid://csa3qrbrtumrx" path="res://Player/attacks/heavy_attacks/stomp.gd" id="13_pisgm"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
 [ext_resource type="Script" uid="uid://dxp52ofg83x2l" path="res://Player/muzzle/muzzle.gd" id="16_lfmf2"]
 
@@ -125,6 +126,10 @@ metadata/_custom_type_script = "uid://bebwvh1isrclx"
 [node name="HeavyAttack" type="Node" parent="StateMachine" unique_id=1929607461]
 script = ExtResource("13_dkpta")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
+
+[node name="Stomp" type="Node" parent="StateMachine/HeavyAttack" unique_id=2111318005]
+script = ExtResource("13_pisgm")
+metadata/_custom_type_script = "uid://bldiinejx0ifa"
 
 [node name="Recovery" type="Node" parent="StateMachine" unique_id=480976096]
 script = ExtResource("11_apopc")

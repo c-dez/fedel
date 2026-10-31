@@ -4,7 +4,7 @@ class_name StateMachine
 
 var current_state: State
 var states: Dictionary = {}
-var last_state: State
+var last_state: State = null
 
 
 func _ready() -> void:
