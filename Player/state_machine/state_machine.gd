@@ -5,12 +5,19 @@ extends StateMachine
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
+
+	debug_label()
+
+
+
+
+
+func debug_label()->void:
 	#DEBUG
 	var label: Label = %DebugLabel
 	label.text = str(
 		'state: ', current_state.name,
 		
-		'\n normal attack index: ', states['attack'].normal_attack_index,
 		
 		)
 	#----------------	

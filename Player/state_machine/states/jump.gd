@@ -19,8 +19,8 @@ var acceleration: float = 30.0
 func _process(_delta: float) -> void:
 	if sm.current_state == sm.states['dodge'] :
 		return
-	if  sm.current_state == sm.states['attack']:
-		return
+	# if  sm.current_state == sm.states['attack']:
+		# return
 
 	
 	if sm.current_state != self:

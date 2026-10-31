@@ -7,14 +7,8 @@
 [ext_resource type="Script" uid="uid://mihungoqau0c" path="res://Player/state_machine/state_machine.gd" id="6_apopc"]
 [ext_resource type="Script" uid="uid://dcibmacockb42" path="res://Player/state_machine/states/idle.gd" id="7_00tjw"]
 [ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
-[ext_resource type="Script" uid="uid://21le0nc21xe4" path="res://Player/state_machine/states/attack.gd" id="9_00tjw"]
-[ext_resource type="Script" uid="uid://cl7j723jdm3fk" path="res://Player/attacks/attack_1.gd" id="9_apopc"]
-[ext_resource type="Script" uid="uid://b67sxwmo5j4h2" path="res://Player/attacks/attack_2.gd" id="10_5htga"]
 [ext_resource type="Script" uid="uid://n6gjy27jfg4w" path="res://Player/state_machine/states/recovery.gd" id="11_apopc"]
-[ext_resource type="Script" uid="uid://bebwvh1isrclx" path="res://Player/attacks/basic_attack.gd" id="11_p5o4e"]
 [ext_resource type="Script" uid="uid://fy8ptwo2glma" path="res://Player/state_machine/states/dodge.gd" id="12_5htga"]
-[ext_resource type="Script" uid="uid://bj0ax5m1xer2t" path="res://Player/state_machine/states/heavy_attack.gd" id="13_dkpta"]
-[ext_resource type="Script" uid="uid://csa3qrbrtumrx" path="res://Player/attacks/heavy_attacks/stomp.gd" id="13_pisgm"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
 [ext_resource type="Script" uid="uid://dxp52ofg83x2l" path="res://Player/muzzle/muzzle.gd" id="16_lfmf2"]
 
@@ -106,30 +100,6 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 [node name="Move" type="Node" parent="StateMachine" unique_id=70612700]
 script = ExtResource("8_00tjw")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
-
-[node name="Attack" type="Node" parent="StateMachine" unique_id=489427180]
-script = ExtResource("9_00tjw")
-metadata/_custom_type_script = "uid://bjhk7q5skhk76"
-
-[node name="Attack_1" type="Node" parent="StateMachine/Attack" unique_id=1749650535]
-script = ExtResource("9_apopc")
-metadata/_custom_type_script = "uid://bebwvh1isrclx"
-
-[node name="Attack_2" type="Node" parent="StateMachine/Attack" unique_id=594559886]
-script = ExtResource("10_5htga")
-metadata/_custom_type_script = "uid://bebwvh1isrclx"
-
-[node name="Attack_3" type="Node" parent="StateMachine/Attack" unique_id=1757823149]
-script = ExtResource("11_p5o4e")
-metadata/_custom_type_script = "uid://bebwvh1isrclx"
-
-[node name="HeavyAttack" type="Node" parent="StateMachine" unique_id=1929607461]
-script = ExtResource("13_dkpta")
-metadata/_custom_type_script = "uid://bjhk7q5skhk76"
-
-[node name="Stomp" type="Node" parent="StateMachine/HeavyAttack" unique_id=2111318005]
-script = ExtResource("13_pisgm")
-metadata/_custom_type_script = "uid://bldiinejx0ifa"
 
 [node name="Recovery" type="Node" parent="StateMachine" unique_id=480976096]
 script = ExtResource("11_apopc")
