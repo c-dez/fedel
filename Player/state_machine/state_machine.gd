@@ -8,7 +8,8 @@ class_name PlayerStateMachine
 
 ## Controlada por states de ataque, en Attack state func enter() = true / recovery state enter() = false 
 var is_attacking: bool = false
-var request_next_attack: bool = false
+var request_next_normal_attack: bool = false
+var request_next_heavy_attack: bool = false
 var normal_attack_index: int = 0
 var heavy_attack_index: int = 0
 
@@ -27,39 +28,71 @@ func _process(_delta: float) -> void:
 	request_normal_attack()
 	start_normal_attack()
 
+	request_heavy_attack()
+	start_heavy_attack()
+
 	
-	debug_label()
+	state_label()
 
 
 ## Solicita ataque al presionar 'normal_attack'	
 func request_normal_attack() -> void:
 	if Input.is_action_just_pressed('normal_attack'):
 		if player.is_on_floor():
-			request_next_attack = true
-		
+			request_next_normal_attack = true
+
+
+func request_heavy_attack() -> void:
+	if Input.is_action_just_pressed('heavy_attack'):
+		if player.is_on_floor():
+			request_next_heavy_attack = true
+
 
 ## Ejecuta ataque solo si no esta atacando y es solicitado
 func start_normal_attack() -> void:
 	if is_attacking:
 		return
 
-	if request_next_attack:
-		match normal_attack_index:
-			0: # x
-				on_state_change(current_state, 'normalattackstate')
-				combo_label('x')
-			1: # x, x
-				on_state_change(current_state, 'normalattackstate')
-				combo_label('x, x')
+	if request_next_normal_attack:
+		if heavy_attack_index == 0:
+			match normal_attack_index:
+				0: # x
+					on_state_change(current_state, 'normalattackstate')
+					combo_label('x')
+				1: # x, x
+					on_state_change(current_state, 'normalattackstate')
+					combo_label('x, x')
 
-		request_next_attack = false
+			request_next_normal_attack = false
 
 
+func start_heavy_attack() -> void:
+	if is_attacking:
+		return
 
-	
-func match_heavy_attack() -> void:
-	pass
+	if request_next_heavy_attack:
+		if heavy_attack_index == 0:
+			match normal_attack_index:
+				0:
+					combo_label('y')
+				1:
+					combo_label('x, y')
+					heavy_attack_index +=1
 
+				2:
+					combo_label('x, x, y')
+
+			request_next_heavy_attack = false
+		# reset_attack_index()
+
+		elif heavy_attack_index == 1:
+			combo_label('x,y,y')
+			request_next_heavy_attack = false
+
+			reset_attack_index()
+
+
+				
 
 func _add_normal_attakcs_states_to_states_dic() -> void:
 	## Nodo solo usado para organizar
@@ -78,10 +111,8 @@ func reset_attack_index() -> void:
 	heavy_attack_index = 0
 
 
-
-
-# DEBUG
-func debug_label() -> void:
+# DEBUG ------------------------------------------------------
+func state_label() -> void:
 	var label: Label = %StateLabel
 	if Input.is_action_just_pressed('debug'):
 		label.visible = !label.visible
@@ -90,17 +121,18 @@ func debug_label() -> void:
 	label.text = str(
 		'--STATE MACHINE-- \n',
 		'State: ', current_state.name.to_upper(), '\n',
-		'normal attack index: ', normal_attack_index
+		# 'normal attack index: ', normal_attack_index
 		)
 
 
-func combo_label(string:String) ->void:
-	var label:Label = %ComboLabel
+func combo_label(string: String) -> void:
+	var label: Label = %ComboLabel
 	var array = []
 	array.append(string)
 	if Input.is_action_just_pressed('debug'):
 		label.visible = !label.visible
 
 	label.text = str(
+		'ATTACK STRING \n',
 		array
 	)

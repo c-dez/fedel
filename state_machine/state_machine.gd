@@ -44,6 +44,3 @@ func _set_states_dictionary() -> void:
 
 func _set_current_state_at_ready() -> void:
 	current_state = get_child(0)
-
-
-

@@ -2,6 +2,7 @@ extends State
 class_name NormalAttackState
 
 ## Clase base para normal attacks
+## Comportamiento ya definido, al heredar de esta clase solo hay que override func attack()
 
 # referenciada en state_machine _add_normal_attacks_states_to_states_dic
 var sm: PlayerStateMachine = null
@@ -22,6 +23,7 @@ func _ready() -> void:
 func enter() -> void:
 	timer.start(attack_duration)
 	sm.is_attacking = true
+	attack()
 
 	sm.player.velocity.x = 0
 	sm.player.velocity.z = 0
@@ -30,6 +32,10 @@ func enter() -> void:
 func exit() -> void:
 	sm.normal_attack_index += 1
 	sm.is_attacking = false
+	pass
+
+## Comportamiento de el ataque ejecutado en enter()
+func attack() ->void:
 	pass
 
 
