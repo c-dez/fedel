@@ -47,12 +47,16 @@ func start_normal_attack() -> void:
 		match normal_attack_index:
 			0: # x
 				on_state_change(current_state, 'normalattackstate')
+				combo_label('x')
 			1: # x, x
 				on_state_change(current_state, 'normalattackstate')
+				combo_label('x, x')
 
 		request_next_attack = false
 
 
+
+	
 func match_heavy_attack() -> void:
 	pass
 
@@ -69,8 +73,16 @@ func _add_normal_attakcs_states_to_states_dic() -> void:
 			states[child.name.to_lower()] = child
 
 
+func reset_attack_index() -> void:
+	normal_attack_index = 0
+	heavy_attack_index = 0
+
+
+
+
+# DEBUG
 func debug_label() -> void:
-	var label: Label = %DebugLabel
+	var label: Label = %StateLabel
 	if Input.is_action_just_pressed('debug'):
 		label.visible = !label.visible
 
@@ -82,6 +94,13 @@ func debug_label() -> void:
 		)
 
 
-func reset_attack_index() -> void:
-	normal_attack_index = 0
-	heavy_attack_index = 0
+func combo_label(string:String) ->void:
+	var label:Label = %ComboLabel
+	var array = []
+	array.append(string)
+	if Input.is_action_just_pressed('debug'):
+		label.visible = !label.visible
+
+	label.text = str(
+		array
+	)
