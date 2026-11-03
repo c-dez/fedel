@@ -12,8 +12,8 @@ var _coyote_timer: float = 0.0
 var max_speed: float = 12.0
 var acceleration: float = 30.0
 
-@onready var sm: StateMachine = get_parent()
-@onready var player: Player = owner
+@onready var sm: PlayerStateMachine = get_parent()
+# @onready var player: Player = owner
 
 
 func _process(_delta: float) -> void:
@@ -31,14 +31,18 @@ func _process(_delta: float) -> void:
 
 
 func enter() -> void:
-	player.velocity.y = player._jump_velocity
+	sm.player.velocity.y = sm.player._jump_velocity
+
+	# reset attack indexes
+	sm.normal_attack_index = 0
+	sm.heavy_attack_index = 0
 
 
 func physics_process(_delta: float) -> void:
 	move_on_air(_delta)
 
 	# Change state to idle
-	if player.is_on_floor():
+	if sm.player.is_on_floor():
 		emit_signal('change_state_to', self, 'idle')
 
 
@@ -46,16 +50,16 @@ func _physics_process(delta: float) -> void:
 	if sm.current_state != sm.states['move']:
 		return
 
-	if player.is_on_floor() == false:
+	if sm.player.is_on_floor() == false:
 		_coyote_timer += delta
 	else:
 		_coyote_timer = 0.0
 
 
 func move_on_air(_delta:float)->void:
-	var input := player.get_input()
+	var input := sm.player.get_input()
 
-	var direction := (player.transform.basis * Vector3(
+	var direction := (sm.player.transform.basis * Vector3(
 		input.x,
 		0.0,
 		input.y
@@ -63,22 +67,22 @@ func move_on_air(_delta:float)->void:
 	# Rotates toward camera
 	direction = direction.rotated(
 		Vector3.UP,
-		player.camera.global_rotation.y
+		sm.player.camera.global_rotation.y
 	)
 
 	if direction.length() > 0.0:
 		var target_velocity = direction * max_speed
 
-		player.velocity.x = move_toward(
-			player.velocity.x,
+		sm.player.velocity.x = move_toward(
+			sm.player.velocity.x,
 			target_velocity.x,
 			_delta * acceleration
 			)
 
-		player.velocity.z = move_toward(
-			player.velocity.z,
+		sm.player.velocity.z = move_toward(
+			sm.player.velocity.z,
 			target_velocity.z,
 			_delta * acceleration
 			)
 
-		player.rotate_skin_towards_move_direction(direction, 10.0, _delta)
+		sm.player.rotate_skin_towards_move_direction(direction, 10.0, _delta)

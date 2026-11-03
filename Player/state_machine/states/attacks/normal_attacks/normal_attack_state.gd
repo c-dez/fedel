@@ -24,6 +24,9 @@ func enter() -> void:
 	sm.normal_attack_index += 1
 	sm.is_attacking = true
 
+	sm.player.velocity.x = 0
+	sm.player.velocity.z = 0
+
 
 func exit() -> void:
 	sm.is_attacking = false

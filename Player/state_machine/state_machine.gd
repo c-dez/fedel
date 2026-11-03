@@ -2,6 +2,8 @@ extends StateMachine
 class_name PlayerStateMachine
 
 ## StateMachine de Player
+## This state machine manages the player's different states, including normal and heavy attacks.
+## It also handles input and transitions between states.
 
 var is_attacking: bool = false
 var normal_attack_index: int = 0
