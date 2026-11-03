@@ -5,7 +5,10 @@ class_name PlayerStateMachine
 ## This state machine manages the player's different states, including normal and heavy attacks.
 ## It also handles input and transitions between states.
 
+
+## Controlada por states de ataque, en Attack state func enter() = true / recovery state enter() = false 
 var is_attacking: bool = false
+var request_next_attack: bool = false
 var normal_attack_index: int = 0
 var heavy_attack_index: int = 0
 
@@ -21,39 +24,33 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
+	request_normal_attack()
+	start_normal_attack()
+
+	
 	debug_label()
 
+
+## Solicita ataque al presionar 'normal_attack'	
+func request_normal_attack() -> void:
 	if Input.is_action_just_pressed('normal_attack'):
-		# necesito request_attack()
-		start_normal_attack()
-	
-	if Input.is_action_just_pressed('heavy_attack'):
-		if player.is_on_floor() == true:
-			if is_attacking:
-				return
+		if player.is_on_floor():
+			request_next_attack = true
 		
-			on_state_change(current_state, 'heavyattack')
 
-
-func debug_label() -> void:
-	var label: Label = %DebugLabel
-	if Input.is_action_just_pressed('debug'):
-		label.visible = !label.visible
-
-	#DEBUG
-	label.text = str(
-		'--STATE MACHINE-- \n',
-		'State: ', current_state.name.to_upper(), '\n',
-		'normal attack index: ', normal_attack_index
-		)
-
-
+## Ejecuta ataque solo si no esta atacando y es solicitado
 func start_normal_attack() -> void:
+	if is_attacking:
+		return
+
+	if request_next_attack:
 		match normal_attack_index:
 			0: # x
 				on_state_change(current_state, 'normalattackstate')
 			1: # x, x
-				pass
+				on_state_change(current_state, 'normalattackstate')
+
+		request_next_attack = false
 
 
 func match_heavy_attack() -> void:
@@ -70,3 +67,21 @@ func _add_normal_attakcs_states_to_states_dic() -> void:
 			child.change_state_to.connect(on_state_change)
 
 			states[child.name.to_lower()] = child
+
+
+func debug_label() -> void:
+	var label: Label = %DebugLabel
+	if Input.is_action_just_pressed('debug'):
+		label.visible = !label.visible
+
+	#DEBUG
+	label.text = str(
+		'--STATE MACHINE-- \n',
+		'State: ', current_state.name.to_upper(), '\n',
+		'normal attack index: ', normal_attack_index
+		)
+
+
+func reset_attack_index() -> void:
+	normal_attack_index = 0
+	heavy_attack_index = 0

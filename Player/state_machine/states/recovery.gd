@@ -1,10 +1,10 @@
 extends State
 
-var attack_index: int = 0
-var timer_duration: float = 0.3
+
+## Tiempo que dura el recovery, durante este tiempo/2 se puede cancelar con movimiento
+@export var timer_duration: float = 0.5
 @onready var sm: StateMachine = get_parent()
 @onready var timer: Timer = Timer.new()
-@onready var player: Player = owner
 
 
 func _ready() -> void:
@@ -23,17 +23,16 @@ func exit() ->void:
 
 
 func process(_delta: float) -> void:
-	if player.get_input().length() > 0.0:
-		timer.stop()
-		reset_attack_index()
-		emit_signal('change_state_to', self, 'idle')
+	if timer.time_left < timer.time_left/2:
+		if sm.player.get_input().length() > 0.0:
+			timer.stop()
+			sm.reset_attack_index()
+			emit_signal('change_state_to', self, 'idle')
 
 
 func on_timer_timeout() -> void:
 	emit_signal('change_state_to', self, 'idle')
-	reset_attack_index()
+	sm.reset_attack_index()
 
 
-func reset_attack_index() -> void:
-	sm.normal_attack_index = 0
-	sm.heavy_attack_index = 0
+
