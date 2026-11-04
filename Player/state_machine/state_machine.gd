@@ -20,7 +20,7 @@ var heavy_attack_index: int = 0
 
 func _ready() -> void:
 	super._ready()
-	_add_normal_attakcs_states_to_states_dic()
+	_add_attakcs_states_to_states_dic()
 
 
 func _process(_delta: float) -> void:
@@ -74,10 +74,13 @@ func start_heavy_attack() -> void:
 		if heavy_attack_index == 0:
 			match normal_attack_index:
 				0:
+					on_state_change(current_state, 'heavyattackstate')
+
 					combo_label('y')
 				1:
+					on_state_change(current_state, 'heavyattackstate')
 					combo_label('x, y')
-					heavy_attack_index +=1
+					heavy_attack_index += 1
 
 				2:
 					combo_label('x, x, y')
@@ -92,14 +95,20 @@ func start_heavy_attack() -> void:
 			reset_attack_index()
 
 
-				
-
-func _add_normal_attakcs_states_to_states_dic() -> void:
+func _add_attakcs_states_to_states_dic() -> void:
 	## Nodo solo usado para organizar
 	var normal_attacks_states_node: Node = get_node('NormalAttacksStates')
+	var heavy_attacks_states_node: Node = get_node('HeavyAttacksStates')
 
 	for child in normal_attacks_states_node.get_children():
 		if child is NormalAttackState:
+			child.sm = self
+			child.change_state_to.connect(on_state_change)
+
+			states[child.name.to_lower()] = child
+
+	for child in heavy_attacks_states_node.get_children():
+		if child is HeavyAttackState:
 			child.sm = self
 			child.change_state_to.connect(on_state_change)
 

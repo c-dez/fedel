@@ -4,7 +4,7 @@ class_name BasicAttack
 
 @export var attack_duration:float = 0.2
 
-@onready var fireball :PackedScene = preload('/home/gato/Documents/godot/fedel/fireball/fireball.tscn')
+@onready var fireball :PackedScene = preload('res://fireball/fireball.tscn')
 
 @onready var attack_state:AttackState = get_parent()
 

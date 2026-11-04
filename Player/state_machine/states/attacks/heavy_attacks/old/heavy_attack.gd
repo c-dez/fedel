@@ -1,5 +1,5 @@
 extends State
-class_name HeavyAttackState
+# class_name HeavyAttackState
 
 ## Clase que maneja el estado de ataque pesado del jugador.
 ## Este estado se encarga de ejecutar una secuencia de ataques pesados basada en el índice del ataque normal actual.
