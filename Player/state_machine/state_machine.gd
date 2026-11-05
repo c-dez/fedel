@@ -62,6 +62,9 @@ func start_normal_attack() -> void:
 				1: # x, x
 					on_state_change(current_state, 'fireballattackstate')
 					combo_label('x, x')
+				2: # x, x, x
+					on_state_change(current_state, 'fireballattackstate')
+					combo_label('x, x, x')
 
 			request_next_normal_attack = false
 
@@ -80,10 +83,14 @@ func start_heavy_attack() -> void:
 				1:
 					on_state_change(current_state, 'heavyattackstate')
 					combo_label('x, y')
-					heavy_attack_index += 1
+					heavy_attack_index = 1
 
 				2:
 					combo_label('x, x, y')
+
+				3: # stomp
+					on_state_change(current_state, 'stompattackstate')
+					heavy_attack_index = 2
 
 			request_next_heavy_attack = false
 		# reset_attack_index()
@@ -93,6 +100,10 @@ func start_heavy_attack() -> void:
 			request_next_heavy_attack = false
 
 			reset_attack_index()
+		elif heavy_attack_index == 2:
+			# stomp
+			on_state_change(current_state, 'stompattackstate')
+			request_next_heavy_attack = false
 
 
 func _add_attakcs_states_to_states_dic() -> void:
@@ -130,7 +141,7 @@ func state_label() -> void:
 	label.text = str(
 		'--STATE MACHINE-- \n',
 		'State: ', current_state.name.to_upper(), '\n',
-		'normal attack index: ', normal_attack_index, '\n',
+		'normal attack index(numero de ataque): ', normal_attack_index, '\n',
 		'heavy attack index: ', heavy_attack_index
 		)
 

@@ -23,6 +23,7 @@ func _ready() -> void:
 func enter() -> void:
 	timer.start(attack_duration)
 	sm.is_attacking = true
+	# sm.normal_attack_index += 1
 	attack()
 
 	sm.player.velocity.x = 0
@@ -30,11 +31,11 @@ func enter() -> void:
 
 
 func exit() -> void:
-	sm.normal_attack_index += 1
 	sm.is_attacking = false
 	pass
 
-## Comportamiento de el ataque ejecutado en enter()
+	
+## Comportamiento de el ataque ejecutado en enter() e incluye sm.normal_attack_index += 1
 func attack() ->void:
 	pass
 

@@ -11,3 +11,5 @@ func attack() ->void:
 	var f:FireBall = fireball.instantiate()
 	muzze.add_child(f)
 	f.current_target = %TargetArea.current_target
+	sm.normal_attack_index += 1
+
