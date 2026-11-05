@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
 [ext_resource type="Script" uid="uid://n6gjy27jfg4w" path="res://Player/state_machine/states/recovery.gd" id="11_apopc"]
 [ext_resource type="Script" uid="uid://fy8ptwo2glma" path="res://Player/state_machine/states/dodge.gd" id="12_5htga"]
+[ext_resource type="Script" uid="uid://cnkyx8wp0j8j" path="res://Player/state_machine/states/attacks/normal_attacks/fireball_attack_state.gd" id="12_dkpta"]
 [ext_resource type="Script" uid="uid://54w113tho1yf" path="res://Player/state_machine/states/attacks/heavy_attacks/heavy_attack_state.gd" id="12_gu6f8"]
 [ext_resource type="Script" uid="uid://cpcy032ua7act" path="res://Player/state_machine/states/attacks/normal_attacks/normal_attack_state.gd" id="12_p5o4e"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
@@ -137,6 +138,9 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 script = ExtResource("12_p5o4e")
 metadata/_custom_type_script = "uid://cpcy032ua7act"
 
+[node name="FireballAttackState" type="Node" parent="StateMachine/NormalAttacksStates" unique_id=663479169]
+script = ExtResource("12_dkpta")
+
 [node name="HeavyAttacksStates" type="Node" parent="StateMachine" unique_id=452339951]
 
 [node name="HeavyAttackState" type="Node" parent="StateMachine/HeavyAttacksStates" unique_id=1328555526]
@@ -144,4 +148,5 @@ script = ExtResource("12_gu6f8")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 
 [node name="Muzzle" type="Node3D" parent="." unique_id=1474674402]
+unique_name_in_owner = true
 script = ExtResource("16_lfmf2")

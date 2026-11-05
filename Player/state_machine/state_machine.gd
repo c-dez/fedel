@@ -57,10 +57,10 @@ func start_normal_attack() -> void:
 		if heavy_attack_index == 0:
 			match normal_attack_index:
 				0: # x
-					on_state_change(current_state, 'normalattackstate')
+					on_state_change(current_state, 'fireballattackstate')
 					combo_label('x')
 				1: # x, x
-					on_state_change(current_state, 'normalattackstate')
+					on_state_change(current_state, 'fireballattackstate')
 					combo_label('x, x')
 
 			request_next_normal_attack = false

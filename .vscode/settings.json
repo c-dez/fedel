@@ -1,3 +1,13 @@
 {
-    "godotTools.editorPath.godot4": "/mnt/HHD/code/compilations/godot.linuxbsd.editor.x86_64"
+    "godotTools.editorPath.godot4": "/mnt/HHD/code/compilations/godot.linuxbsd.editor.x86_64",
+    "files.exclude": {
+        // "**/.git": true,
+        // "**/.svn": true,
+        // "**/.hg": true,
+        // "**/.jj": true,
+        // "**/.DS_Store": true,
+        // "**/Thumbs.db": true
+        "**/*.uid":true
+    }
 }
+//
