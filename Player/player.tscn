@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cnkyx8wp0j8j" path="res://Player/state_machine/states/attacks/normal_attacks/fireball_attack_state.gd" id="12_dkpta"]
 [ext_resource type="Script" uid="uid://54w113tho1yf" path="res://Player/state_machine/states/attacks/heavy_attacks/heavy_attack_state.gd" id="12_gu6f8"]
 [ext_resource type="Script" uid="uid://qx22m674f1ig" path="res://Player/state_machine/states/attacks/normal_attacks/stomp.gd" id="14_dkpta"]
+[ext_resource type="Script" uid="uid://dkypcl4xburb6" path="res://Player/state_machine/request_attack.gd" id="14_lfmf2"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
 [ext_resource type="Script" uid="uid://dxp52ofg83x2l" path="res://Player/muzzle/muzzle.gd" id="16_lfmf2"]
 
@@ -117,8 +118,8 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 script = ExtResource("8_00tjw")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 
-[node name="Recovery" type="Node" parent="StateMachine" unique_id=480976096]
-script = ExtResource("11_apopc")
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1665414175]
+script = ExtResource("15_dkpta")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 
 [node name="Dodge" type="Node" parent="StateMachine" unique_id=273700944]
@@ -128,9 +129,12 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 [node name="DodgeTimer" type="Timer" parent="StateMachine/Dodge" unique_id=2136894810]
 one_shot = true
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=1665414175]
-script = ExtResource("15_dkpta")
+[node name="Recovery" type="Node" parent="StateMachine" unique_id=480976096]
+script = ExtResource("11_apopc")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
+
+[node name="RequestAttack" type="Node" parent="StateMachine" unique_id=923023751]
+script = ExtResource("14_lfmf2")
 
 [node name="NormalAttacksStates" type="Node" parent="StateMachine" unique_id=1917263505]
 

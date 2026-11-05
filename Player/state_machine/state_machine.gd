@@ -25,8 +25,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	request_normal_attack()
-	start_normal_attack()
+	# request_normal_attack()
+	# start_normal_attack()
 
 	request_heavy_attack()
 	start_heavy_attack()
@@ -35,40 +35,11 @@ func _process(_delta: float) -> void:
 	state_label()
 
 
-## Solicita ataque al presionar 'normal_attack'	
-func request_normal_attack() -> void:
-	if Input.is_action_just_pressed('normal_attack'):
-		if player.is_on_floor():
-			request_next_normal_attack = true
-
-
 func request_heavy_attack() -> void:
 	if Input.is_action_just_pressed('heavy_attack'):
 		if player.is_on_floor():
 			request_next_heavy_attack = true
 
-
-## Ejecuta ataque solo si no esta atacando y es solicitado
-func start_normal_attack() -> void:
-	if is_attacking:
-		return
-
-	if request_next_normal_attack:
-		if heavy_attack_index == 0:
-			match normal_attack_index:
-				0: # x
-					on_state_change(current_state, 'fireballattackstate')
-					combo_label('x')
-				1: # x, x
-					on_state_change(current_state, 'fireballattackstate')
-					combo_label('x, x')
-				2: # x, x, x
-					on_state_change(current_state, 'fireballattackstate')
-					combo_label('x, x, x')
-				3:
-					on_state_change(current_state, 'stompattackstate')
-
-			request_next_normal_attack = false
 
 # FALTA POR IMPLEMENTAR - PLANEAR RUTA DE COMBO!!1
 func start_heavy_attack() -> void:
@@ -144,7 +115,7 @@ func state_label() -> void:
 	label.text = str(
 		'--STATE MACHINE-- \n',
 		'State: ', current_state.name.to_upper(), '\n',
-		'normal attack index(numero de ataque): ', normal_attack_index, '\n',
+		'normal attack index(numero de proximo ataque): ', normal_attack_index, '\n',
 		'heavy attack index: ', heavy_attack_index
 		)
 
