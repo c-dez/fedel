@@ -23,11 +23,13 @@ func exit() ->void:
 
 
 func process(_delta: float) -> void:
+	# si se mueve cancela el recovery
 	if timer.time_left < timer.time_left/2:
 		if sm.player.get_input().length() > 0.0:
 			timer.stop()
 			sm.reset_attack_index()
 			emit_signal('change_state_to', self, 'idle')
+			# sm.reset_attack_index()
 
 
 func on_timer_timeout() -> void:

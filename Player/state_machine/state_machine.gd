@@ -130,7 +130,8 @@ func state_label() -> void:
 	label.text = str(
 		'--STATE MACHINE-- \n',
 		'State: ', current_state.name.to_upper(), '\n',
-		# 'normal attack index: ', normal_attack_index
+		'normal attack index: ', normal_attack_index, '\n',
+		'heavy attack index: ', heavy_attack_index
 		)
 
 
