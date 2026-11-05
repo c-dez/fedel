@@ -1,4 +1,4 @@
-extends HeavyAttackState
+extends NormalAttackState
 class_name StompAttackState
 
 
@@ -12,7 +12,7 @@ func enter() -> void:
 
 
 func attack() -> void:
-	print('stomp')
+	# print('stomp')
 	input = sm.player.get_input()
 	sm.player.velocity.y = 5
 	

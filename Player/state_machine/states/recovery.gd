@@ -2,8 +2,8 @@ extends State
 
 
 ## Tiempo que dura el recovery, durante este tiempo/2 se puede cancelar con movimiento
-@export var timer_duration: float = 0.5
-@export var timer_duration_stomp: float = 3.0
+@export var timer_duration: float = 0.2
+@export var timer_duration_stomp: float = 1.0
 var _timer_duration:float = 0.0
 @onready var sm: StateMachine = get_parent()
 @onready var timer: Timer = Timer.new()
@@ -42,7 +42,7 @@ func process(_delta: float) -> void:
 
 func on_timer_timeout() -> void:
 	emit_signal('change_state_to', self, 'idle')
-	sm.reset_attack_index()
+	# sm.reset_attack_index()
 
 
 

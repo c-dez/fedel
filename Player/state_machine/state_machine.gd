@@ -65,10 +65,12 @@ func start_normal_attack() -> void:
 				2: # x, x, x
 					on_state_change(current_state, 'fireballattackstate')
 					combo_label('x, x, x')
+				3:
+					on_state_change(current_state, 'stompattackstate')
 
 			request_next_normal_attack = false
 
-
+# FALTA POR IMPLEMENTAR - PLANEAR RUTA DE COMBO!!1
 func start_heavy_attack() -> void:
 	if is_attacking:
 		return
@@ -88,9 +90,10 @@ func start_heavy_attack() -> void:
 				2:
 					combo_label('x, x, y')
 
-				3: # stomp
-					on_state_change(current_state, 'stompattackstate')
-					heavy_attack_index = 2
+				3: # stomp es normal
+					# on_state_change(current_state, 'stompattackstate')
+					# heavy_attack_index = 2
+					pass
 
 			request_next_heavy_attack = false
 		# reset_attack_index()
