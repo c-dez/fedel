@@ -2,11 +2,9 @@ extends StateMachine
 class_name PlayerStateMachine
 
 ## StateMachine de Player
-## This state machine manages the player's different states, including normal and heavy attacks.
-## It also handles input and transitions between states.
 
 
-## Controlada por states de ataque, en Attack state func enter() = true / recovery state enter() = false 
+
 var is_attacking: bool = false
 var request_next_normal_attack: bool = false
 var request_next_heavy_attack: bool = false
