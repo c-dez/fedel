@@ -25,59 +25,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	# request_normal_attack()
-	# start_normal_attack()
 
-	request_heavy_attack()
-	start_heavy_attack()
-
-	
 	state_label()
-
-
-func request_heavy_attack() -> void:
-	if Input.is_action_just_pressed('heavy_attack'):
-		if player.is_on_floor():
-			request_next_heavy_attack = true
-
-
-# FALTA POR IMPLEMENTAR - PLANEAR RUTA DE COMBO!!1
-func start_heavy_attack() -> void:
-	if is_attacking:
-		return
-
-	if request_next_heavy_attack:
-		if heavy_attack_index == 0:
-			match normal_attack_index:
-				0:
-					on_state_change(current_state, 'heavyattackstate')
-
-					combo_label('y')
-				1:
-					on_state_change(current_state, 'heavyattackstate')
-					combo_label('x, y')
-					heavy_attack_index = 1
-
-				2:
-					combo_label('x, x, y')
-
-				3: # stomp es normal
-					# on_state_change(current_state, 'stompattackstate')
-					# heavy_attack_index = 2
-					pass
-
-			request_next_heavy_attack = false
-		# reset_attack_index()
-
-		elif heavy_attack_index == 1:
-			combo_label('x,y,y')
-			request_next_heavy_attack = false
-
-			reset_attack_index()
-		elif heavy_attack_index == 2:
-			# stomp
-			on_state_change(current_state, 'stompattackstate')
-			request_next_heavy_attack = false
 
 
 func _add_attakcs_states_to_states_dic() -> void:
