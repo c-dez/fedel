@@ -29,6 +29,9 @@ func enter() -> void:
 	sm.player.velocity.x = 0
 	sm.player.velocity.z = 0
 
+	# rotate skin toward
+	
+
 
 func exit() -> void:
 	sm.is_attacking = false

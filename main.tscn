@@ -73,21 +73,47 @@ size = Vector3(6.152313, 3, 9.475098)
 [node name="Dummy" type="CharacterBody3D" parent="." unique_id=662741425 groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.733295, 1.650886, -8.092065)
 collision_layer = 5
-metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Dummy" unique_id=1283465478]
 mesh = SubResource("CapsuleMesh_ktebk")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy" unique_id=1560868982]
 shape = SubResource("CapsuleShape3D_ig7tw")
+metadata/_edit_lock_ = true
 
 [node name="Dummy2" type="CharacterBody3D" parent="." unique_id=1718476392 groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.437466, 1.5060787, -1.7329073)
 collision_layer = 5
-metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Dummy2" unique_id=9088589]
 mesh = SubResource("CapsuleMesh_ktebk")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy2" unique_id=844838968]
 shape = SubResource("CapsuleShape3D_ig7tw")
+metadata/_edit_lock_ = true
+
+[node name="Dummy3" type="CharacterBody3D" parent="." unique_id=594801272 groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.299511, 1.5060787, 5.6118903)
+collision_layer = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Dummy3" unique_id=696462195]
+mesh = SubResource("CapsuleMesh_ktebk")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy3" unique_id=1126936589]
+shape = SubResource("CapsuleShape3D_ig7tw")
+metadata/_edit_lock_ = true
+
+[node name="Dummy4" type="CharacterBody3D" parent="." unique_id=2112535635 groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.361512, 7.808326, 9.841082)
+collision_layer = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Dummy4" unique_id=1775984542]
+mesh = SubResource("CapsuleMesh_ktebk")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy4" unique_id=2003341173]
+shape = SubResource("CapsuleShape3D_ig7tw")
+metadata/_edit_lock_ = true

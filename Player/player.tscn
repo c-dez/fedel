@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dpa8j0lbrbhvl" path="res://Player/scripts/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="2_4ntmi"]
 [ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="3_btcbx"]
-[ext_resource type="Script" uid="uid://qmmvw6283vb7" path="res://Player/target_area/target_area.gd" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://mihungoqau0c" path="res://Player/state_machine/state_machine.gd" id="6_apopc"]
 [ext_resource type="Script" uid="uid://dcibmacockb42" path="res://Player/state_machine/states/idle.gd" id="7_00tjw"]
 [ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
@@ -15,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dkypcl4xburb6" path="res://Player/state_machine/request_attack.gd" id="14_lfmf2"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
 [ext_resource type="Script" uid="uid://dxp52ofg83x2l" path="res://Player/muzzle/muzzle.gd" id="16_lfmf2"]
+[ext_resource type="PackedScene" uid="uid://c3tbtkljm7qny" path="res://Player/target_component/target_component.tscn" id="16_pisgm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -29,9 +29,6 @@ size = Vector3(1, 1, 0.3310547)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ktebk"]
 margin = 0.5
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ktebk"]
-size = Vector3(10, 9.671265, 18.620972)
 
 [node name="Player" type="CharacterBody3D" unique_id=873849799 groups=["player"]]
 script = ExtResource("1_l8h54")
@@ -71,22 +68,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4101796)
 script = ExtResource("3_btcbx")
 lerp_power = 5.0
-
-[node name="TargetArea" type="Node3D" parent="." unique_id=1935637730 node_paths=PackedStringArray("spring_arm_pivot")]
-unique_name_in_owner = true
-visible = false
-script = ExtResource("4_gwnis")
-spring_arm_pivot = NodePath("../SpringArmPivot")
-metadata/_edit_lock_ = true
-
-[node name="Area3D" type="Area3D" parent="TargetArea" unique_id=213175328]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetArea/Area3D" unique_id=1124363841]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8190308, -9.892761)
-shape = SubResource("BoxShape3D_ktebk")
 
 [node name="StateLabel" type="Label" parent="." unique_id=1516170203]
 unique_name_in_owner = true
@@ -140,6 +121,7 @@ script = ExtResource("14_lfmf2")
 
 [node name="FireballAttackState" type="Node" parent="StateMachine/NormalAttacksStates" unique_id=663479169]
 script = ExtResource("12_dkpta")
+attack_duration = 0.6
 
 [node name="StompAttackState" type="Node" parent="StateMachine/NormalAttacksStates" unique_id=503271925]
 script = ExtResource("14_dkpta")
@@ -155,3 +137,6 @@ metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 [node name="Muzzle" type="Node3D" parent="." unique_id=1474674402]
 unique_name_in_owner = true
 script = ExtResource("16_lfmf2")
+
+[node name="TargetComponent" parent="." unique_id=1477546706 instance=ExtResource("16_pisgm")]
+unique_name_in_owner = true

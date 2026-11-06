@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c3tbtkljm7qny"]
+
+[ext_resource type="Script" uid="uid://dc0lfiugehug4" path="res://Player/target_component/target_component.gd" id="1_htojt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_latbv"]
+radius = 40.0
+
+[node name="TargetComponent" type="Node3D" unique_id=1477546706]
+script = ExtResource("1_htojt")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=463905404]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=395952345]
+shape = SubResource("SphereShape3D_latbv")

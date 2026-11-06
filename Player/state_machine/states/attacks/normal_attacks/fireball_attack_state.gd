@@ -10,6 +10,17 @@ class_name FireballAttackState
 func attack() ->void:
 	var f:FireBall = fireball.instantiate()
 	muzze.add_child(f)
-	f.current_target = %TargetArea.current_target
+	f.current_target = %TargetComponent.closest_enemy
 	sm.normal_attack_index += 1
+
+	if %TargetComponent.closest_enemy == null:
+		return
+
+	var enemy = %TargetComponent.closest_enemy
+	#rotate skin
+	sm.player.skin.look_at(
+		enemy.global_position,
+		Vector3.UP
+	)
+	sm.player.skin.rotation.x = 0
 
