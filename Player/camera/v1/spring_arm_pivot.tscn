@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bfi78hhg0pc6d"]
+
+[ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="1_n3ne7"]
+[ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="2_m50p7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ktebk"]
+margin = 0.5
+
+[node name="SpringArmPivot" type="Node3D" unique_id=269762037]
+script = ExtResource("1_n3ne7")
+joy_sens = 3.5
+min_vertical_angle = -1.0471975511965976
+max_vertical_angle = 0.4363323129985824
+metadata/_edit_lock_ = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=83481814]
+shape = SubResource("SphereShape3D_ktebk")
+spring_length = 5.0
+
+[node name="SpringPos" type="Node3D" parent="SpringArm3D" unique_id=200055035]
+unique_name_in_owner = true
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="." unique_id=852548690]
+unique_name_in_owner = true
+script = ExtResource("2_m50p7")
+lerp_power = 5.0

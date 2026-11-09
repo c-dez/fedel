@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://bpplupp6kx8ye"]
 
 [ext_resource type="Script" uid="uid://dpa8j0lbrbhvl" path="res://Player/scripts/player.gd" id="1_l8h54"]
-[ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="2_4ntmi"]
-[ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="3_btcbx"]
 [ext_resource type="Script" uid="uid://mihungoqau0c" path="res://Player/state_machine/state_machine.gd" id="6_apopc"]
 [ext_resource type="Script" uid="uid://dcibmacockb42" path="res://Player/state_machine/states/idle.gd" id="7_00tjw"]
 [ext_resource type="Script" uid="uid://cr1d3xs3f11l7" path="res://Player/state_machine/states/move.gd" id="8_00tjw"]
@@ -11,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cnkyx8wp0j8j" path="res://Player/state_machine/states/attacks/normal_attacks/fireball_attack_state.gd" id="12_dkpta"]
 [ext_resource type="Script" uid="uid://54w113tho1yf" path="res://Player/state_machine/states/attacks/heavy_attacks/heavy_attack_state.gd" id="12_gu6f8"]
 [ext_resource type="Script" uid="uid://qx22m674f1ig" path="res://Player/state_machine/states/attacks/normal_attacks/stomp.gd" id="14_dkpta"]
+[ext_resource type="Script" uid="uid://w8n348ldekxx" path="res://Player/camera/v2/spring_arm_3d.gd" id="14_gu6f8"]
 [ext_resource type="Script" uid="uid://dkypcl4xburb6" path="res://Player/state_machine/request_attack.gd" id="14_lfmf2"]
 [ext_resource type="Script" uid="uid://dq63fxg712va8" path="res://Player/state_machine/states/jump.gd" id="15_dkpta"]
 [ext_resource type="Script" uid="uid://dxp52ofg83x2l" path="res://Player/muzzle/muzzle.gd" id="16_lfmf2"]
@@ -27,8 +26,7 @@ albedo_color = Color(1, 0.39215687, 1, 1)
 material = SubResource("StandardMaterial3D_latbv")
 size = Vector3(1, 1, 0.3310547)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ktebk"]
-margin = 0.5
+[sub_resource type="SphereShape3D" id="SphereShape3D_latbv"]
 
 [node name="Player" type="CharacterBody3D" unique_id=873849799 groups=["player"]]
 script = ExtResource("1_l8h54")
@@ -47,27 +45,6 @@ mesh = SubResource("CapsuleMesh_ktebk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Skin/Mesh" unique_id=657584417]
 transform = Transform3D(1, 0, 0, 0, 0.3067053, 0, 0, 0, 1, 0, 0.44711077, -0.33447266)
 mesh = SubResource("BoxMesh_ktebk")
-
-[node name="SpringArmPivot" type="Node3D" parent="." unique_id=219132310]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1229923, 0)
-script = ExtResource("2_4ntmi")
-joy_sens = 3.5
-min_vertical_angle = -1.0471975511965976
-max_vertical_angle = 0.4363323129985824
-metadata/_edit_lock_ = true
-
-[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=306249843]
-shape = SubResource("SphereShape3D_ktebk")
-spring_length = 5.0
-
-[node name="SpringPos" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=203616059]
-unique_name_in_owner = true
-
-[node name="ThirdPersonCamera" type="Camera3D" parent="SpringArmPivot" unique_id=186875610]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4101796)
-script = ExtResource("3_btcbx")
-lerp_power = 5.0
 
 [node name="StateLabel" type="Label" parent="." unique_id=1516170203]
 unique_name_in_owner = true
@@ -140,3 +117,10 @@ script = ExtResource("16_lfmf2")
 
 [node name="TargetComponent" parent="." unique_id=1477546706 instance=ExtResource("16_pisgm")]
 unique_name_in_owner = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=573298521]
+shape = SubResource("SphereShape3D_latbv")
+spring_length = 5.0
+script = ExtResource("14_gu6f8")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1903364947]
