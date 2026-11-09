@@ -3,9 +3,9 @@ class_name Player
 
 ## Clase que controla el comportamiento del jugador en el juego 3D.
 ## Proporciona funcionalidades para el movimiento, salto, gravedad y rotación del personaje.
-@export_category('Movement')
-@export var max_speed: float = 10.0
-@export var acceleration: float = 50.0
+# @export_category('Movement')
+# @export var max_speed: float = 10.0
+# @export var acceleration: float = 50.0
 
 @export_category('jump')
 @export var jump_height: float = 2.0
@@ -69,6 +69,7 @@ func move(_max_speed: float, _acceleration: float, _delta: float) -> void:
 			target_velocity.z,
 			_delta * _acceleration
 		)
+
 
 func _calculate_gravity() -> void:
 	_jump_velocity = 2.0 * jump_height / jump_time_to_peak

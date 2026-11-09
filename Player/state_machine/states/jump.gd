@@ -17,7 +17,7 @@ var acceleration: float = 30.0
 
 
 func _process(_delta: float) -> void:
-	if sm.current_state == sm.states['dodge'] :
+	if sm.current_state == sm.states['dodge']:
 		return
 	# if  sm.current_state == sm.states['attack']:
 		# return
@@ -33,13 +33,10 @@ func _process(_delta: float) -> void:
 func enter() -> void:
 	sm.player.velocity.y = sm.player._jump_velocity
 
-	# reset attack indexes
-	sm.normal_attack_index = 0
-	sm.heavy_attack_index = 0
-
+	sm.reset_attack_index()
 
 func physics_process(_delta: float) -> void:
-	sm.player.move(max_speed,acceleration,_delta)
+	sm.player.move(max_speed, acceleration, _delta)
 
 	# Change state to idle
 	if sm.player.is_on_floor():
@@ -56,33 +53,4 @@ func _physics_process(delta: float) -> void:
 		_coyote_timer = 0.0
 
 
-# func move_on_air(_delta:float)->void:
-# 	var input := sm.player.get_input()
-
-# 	var direction := (sm.player.transform.basis * Vector3(
-# 		input.x,
-# 		0.0,
-# 		input.y
-# 	)).normalized()
-# 	# Rotates toward camera
-# 	direction = direction.rotated(
-# 		Vector3.UP,
-# 		sm.player.camera.global_rotation.y
-# 	)
-
-# 	if direction.length() > 0.0:
-# 		var target_velocity = direction * max_speed
-
-# 		sm.player.velocity.x = move_toward(
-# 			sm.player.velocity.x,
-# 			target_velocity.x,
-# 			_delta * acceleration
-# 			)
-
-# 		sm.player.velocity.z = move_toward(
-# 			sm.player.velocity.z,
-# 			target_velocity.z,
-# 			_delta * acceleration
-# 			)
-
-# 		sm.player.rotate_skin_towards_move_direction(direction, 10.0, _delta)
+# 
