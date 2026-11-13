@@ -2,15 +2,12 @@ extends State
 class_name JumpState
 
 
-## Esta clase maneja el estado de salto del jugador. Incluye la lógica para el salto, el tiempo de coyote,
-## la aceleración y la velocidad máxima. También se encarga de cambiar al estado de idle cuando el jugador
-## toca el suelo.
+## Esta clase solo se encarga de vigilar cuando puede saltar y dar el impulso para ello, incluye coyote time
 
 
 const COYOTE_TIME: float = 0.2
 var _coyote_timer: float = 0.0
-# @export var max_speed: float = 12.0
-# @export var acceleration: float = 30.0
+
 
 @onready var sm: PlayerStateMachine = get_parent()
 
@@ -20,8 +17,6 @@ func _process(_delta: float) -> void:
 		return
 	if sm.current_state == sm.states['onair']:
 		return
-	# if  sm.current_state == sm.states['attack']:
-		# return
 
 	
 	if sm.current_state != self:
@@ -38,12 +33,6 @@ func enter() -> void:
 
 
 func physics_process(_delta: float) -> void:
-	# sm.player.move(max_speed, acceleration, _delta)
-
-	# Change state to idle
-	# if sm.player.is_on_floor():
-	# 	emit_signal('change_state_to', self, 'idle')
-
 	#change state to onAir
 	if _coyote_timer == 0.0 and sm.player.is_on_floor() == false:
 		emit_signal('change_state_to', self, 'onair')
@@ -58,5 +47,3 @@ func _physics_process(delta: float) -> void:
 	else:
 		_coyote_timer = 0.0
 
-
-# 
