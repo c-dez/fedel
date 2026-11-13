@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://fy8ptwo2glma" path="res://Player/state_machine/states/dodge.gd" id="12_5htga"]
 [ext_resource type="Script" uid="uid://cnkyx8wp0j8j" path="res://Player/state_machine/states/attacks/normal_attacks/fireball_attack_state.gd" id="12_dkpta"]
 [ext_resource type="Script" uid="uid://54w113tho1yf" path="res://Player/state_machine/states/attacks/heavy_attacks/heavy_attack_state.gd" id="12_gu6f8"]
+[ext_resource type="Script" uid="uid://ce01rpse07v35" path="res://Player/state_machine/states/on_air.gd" id="12_lfmf2"]
 [ext_resource type="Script" uid="uid://qx22m674f1ig" path="res://Player/state_machine/states/attacks/normal_attacks/stomp.gd" id="14_dkpta"]
 [ext_resource type="Script" uid="uid://w8n348ldekxx" path="res://Player/camera/v2/spring_arm_3d.gd" id="14_gu6f8"]
 [ext_resource type="Script" uid="uid://dkypcl4xburb6" path="res://Player/state_machine/request_attack.gd" id="14_lfmf2"]
@@ -109,6 +110,10 @@ metadata/_custom_type_script = "uid://qx22m674f1ig"
 
 [node name="HeavyAttackState" type="Node" parent="StateMachine/HeavyAttacksStates" unique_id=1328555526]
 script = ExtResource("12_gu6f8")
+metadata/_custom_type_script = "uid://bjhk7q5skhk76"
+
+[node name="OnAir" type="Node" parent="StateMachine" unique_id=434966521]
+script = ExtResource("12_lfmf2")
 metadata/_custom_type_script = "uid://bjhk7q5skhk76"
 
 [node name="Muzzle" type="Node3D" parent="." unique_id=1474674402]
