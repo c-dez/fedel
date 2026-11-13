@@ -13,7 +13,6 @@ var max_speed: float = 12.0
 var acceleration: float = 30.0
 
 @onready var sm: PlayerStateMachine = get_parent()
-# @onready var player: Player = owner
 
 
 func _process(_delta: float) -> void:
@@ -26,7 +25,7 @@ func _process(_delta: float) -> void:
 	if sm.current_state != self:
 		if Input.is_action_just_pressed('jump'):
 			if _coyote_timer <= coyote_time:
-				emit_signal('change_state_to', sm.current_state, self.name.to_lower())
+				emit_signal('change_state_to', sm.current_state, 'jump')
 				_coyote_timer = 0
 
 
@@ -34,6 +33,7 @@ func enter() -> void:
 	sm.player.velocity.y = sm.player._jump_velocity
 
 	sm.reset_attack_index()
+
 
 func physics_process(_delta: float) -> void:
 	sm.player.move(max_speed, acceleration, _delta)
