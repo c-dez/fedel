@@ -7,10 +7,10 @@ class_name JumpState
 ## toca el suelo.
 
 
-var coyote_time: float = 0.2
+const COYOTE_TIME: float = 0.2
 var _coyote_timer: float = 0.0
-var max_speed: float = 12.0
-var acceleration: float = 30.0
+@export var max_speed: float = 12.0
+@export var acceleration: float = 30.0
 
 @onready var sm: PlayerStateMachine = get_parent()
 
@@ -24,7 +24,7 @@ func _process(_delta: float) -> void:
 	
 	if sm.current_state != self:
 		if Input.is_action_just_pressed('jump'):
-			if _coyote_timer <= coyote_time:
+			if _coyote_timer <= COYOTE_TIME:
 				emit_signal('change_state_to', sm.current_state, 'jump')
 				_coyote_timer = 0
 
