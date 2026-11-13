@@ -7,8 +7,6 @@ class_name JumpState
 
 const COYOTE_TIME: float = 0.2
 var _coyote_timer: float = 0.0
-
-
 @onready var sm: PlayerStateMachine = get_parent()
 
 
@@ -46,4 +44,3 @@ func _physics_process(delta: float) -> void:
 		_coyote_timer += delta
 	else:
 		_coyote_timer = 0.0
-
