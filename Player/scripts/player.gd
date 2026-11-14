@@ -22,6 +22,12 @@ var _jump_fall_gravity: float
 
 func _ready() -> void:
 	_calculate_gravity()
+	skin.top_level = true
+
+
+func _process(delta: float) -> void:
+	skin.global_position = global_position
+
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +54,6 @@ func gravity(delta: float) -> void:
 
 func move(_max_speed: float, _acceleration: float, _delta: float) -> void:
 	var input := get_input()
-
 	var direction := transform.basis * Vector3(
 		input.x,
 		0.0,
@@ -70,8 +75,28 @@ func move(_max_speed: float, _acceleration: float, _delta: float) -> void:
 			_delta * _acceleration
 		)
 
+	rotate_skin_towards_direction(direction,10,_delta)
+
 
 func _calculate_gravity() -> void:
 	_jump_velocity = 2.0 * jump_height / jump_time_to_peak
 	_jump_gravity = 2.0 * jump_height / (jump_time_to_peak * jump_time_to_peak)
 	_jump_fall_gravity = 2.0 * jump_height / (jump_time_to_descend * jump_time_to_descend)
+
+
+func rotate_skin_towards_direction(
+    direction: Vector3,
+    speed: float,
+    delta: float
+) -> void:
+
+	if direction.length_squared() < 0.1:
+		return
+
+	var target_angle := atan2(direction.x, direction.z) + PI
+
+	skin.global_rotation.y = lerp_angle(
+        skin.global_rotation.y,
+        target_angle,
+        speed * delta
+    )

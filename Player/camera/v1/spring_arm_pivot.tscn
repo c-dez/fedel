@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bfi78hhg0pc6d"]
 
-[ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/scripts/spring_arm_3d.gd" id="1_n3ne7"]
-[ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/scripts/camera_follow.gd" id="2_m50p7"]
+[ext_resource type="Script" uid="uid://kxnnreeqtplu" path="res://Player/camera/v1/spring_arm_3d.gd" id="1_n3ne7"]
+[ext_resource type="Script" uid="uid://c187l4d0kt1wq" path="res://Player/camera/v1/camera_follow.gd" id="2_m50p7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ktebk"]
 margin = 0.5
