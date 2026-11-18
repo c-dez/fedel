@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://b4vhyvdcfahvc"]
 
 [ext_resource type="PackedScene" uid="uid://bpplupp6kx8ye" path="res://Player/player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://4wk6qomk3rli" path="res://water/v2/water_v_2.tscn" id="2_0xm2m"]
-[ext_resource type="Shader" uid="uid://bjflwf2yocj4c" path="res://water/v2/water.gdshader" id="3_h2yge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,52 +25,6 @@ albedo_color = Color(1, 0.3372549, 0.41568628, 1)
 material = SubResource("StandardMaterial3D_latbv")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ig7tw"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
-size = Vector2(1000, 1000)
-subdivide_width = 100
-subdivide_depth = 100
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pdnsc"]
-noise_type = 2
-frequency = 0.0346
-fractal_type = 0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_einn5"]
-noise = SubResource("FastNoiseLite_pdnsc")
-seamless = true
-as_normal_map = true
-bump_strength = 15.3
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_einn5"]
-noise_type = 3
-frequency = 0.0312
-fractal_type = 2
-fractal_weighted_strength = 0.8
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pdnsc"]
-noise = SubResource("FastNoiseLite_einn5")
-seamless = true
-as_normal_map = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
-render_priority = 0
-shader = ExtResource("3_h2yge")
-shader_parameter/albedo = Color(0.1254902, 0.7882353, 0.7647059, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.51200002432
-shader_parameter/texture_normal = SubResource("NoiseTexture2D_einn5")
-shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_pdnsc")
-shader_parameter/wave_direction1 = Vector2(1, 0)
-shader_parameter/wave_direction2 = Vector2(0, 1)
-shader_parameter/time_scale = 0.00999999977648
-shader_parameter/amplitude1 = 0.585
-shader_parameter/amplitude2 = 0.15
-shader_parameter/wave_count1 = 2.0
-shader_parameter/wave_count2 = 3.0
-shader_parameter/speed1 = 1.0
-shader_parameter/speed2 = 1.5
-shader_parameter/fresnel_mult = 0.30000000447036
 
 [node name="Main" type="Node3D" unique_id=76870631]
 
@@ -183,8 +135,3 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy4" unique_id=2003341173]
 shape = SubResource("CapsuleShape3D_ig7tw")
 metadata/_edit_lock_ = true
-
-[node name="WaterV2" parent="." unique_id=624569218 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.402, 0)
-mesh = SubResource("PlaneMesh_h2yge")
-surface_material_override/0 = SubResource("ShaderMaterial_1bvp3")

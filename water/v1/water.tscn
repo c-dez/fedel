@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://q1tvtieioni3"]
 
-[ext_resource type="Shader" uid="uid://c375tnle1v3kw" path="res://water/water.gdshader" id="1_wjap7"]
+[ext_resource type="Shader" uid="uid://c375tnle1v3kw" path="res://water/v1/water.gdshader" id="1_wjap7"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ktebk"]
 size = Vector2(20, 20)
@@ -10,9 +10,6 @@ subdivide_depth = 10
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_latbv"]
 render_priority = 0
 shader = ExtResource("1_wjap7")
-shader_parameter/amplitude = 0.3
-shader_parameter/wave_count = 2.0
-shader_parameter/speed = 1.0
 shader_parameter/amplitude1 = 0.3
 shader_parameter/amplitude2 = 0.15
 shader_parameter/wave_count1 = 2.0

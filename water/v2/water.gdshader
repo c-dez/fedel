@@ -2,7 +2,7 @@ shader_type spatial;
 
 // version 2!
 
-uniform vec3 albedo:source_color;
+uniform vec3 primary_color:source_color = vec3(0.1255, 0.7882, 0.7647);//#20C9C3
 uniform float metallic:hint_range(0.0, 1.0) = 0;
 uniform float roughness:hint_range(0.0, 1.0) = 0.02;
 
@@ -25,9 +25,15 @@ uniform float speed1 = 1.0;
 uniform float speed2 = 1.5;
 // usado para aplicar al albedo
 uniform float fresnel_mult :hint_range(0.0, 2.0, 0.05) = 0.5;
+//fresnel effect
 float fresnel(float amount,vec3 normal,vec3 view){
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0)),amount);
 }
+
+
+
+
+
 
 void vertex() {
 	// mover vertex.y siguiendo formula de olas
@@ -53,8 +59,9 @@ void fragment() {
 	
 	float basic_fresnel = fresnel(3.0,NORMAL, VIEW);
 
-	ALBEDO = albedo + (fresnel_mult * basic_fresnel);
-	// ALBEDO = albedo;
+
+
+	ALBEDO = primary_color + (fresnel_mult * basic_fresnel);
 	METALLIC = metallic;
 	ROUGHNESS =roughness * (1.0 - basic_fresnel);
 
