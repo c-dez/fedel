@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://q1tvtieioni3"]
+
+[ext_resource type="Shader" uid="uid://c375tnle1v3kw" path="res://water/water.gdshader" id="1_wjap7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ktebk"]
+size = Vector2(20, 20)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_latbv"]
+render_priority = 0
+shader = ExtResource("1_wjap7")
+shader_parameter/amplitude = 0.3
+shader_parameter/wave_count = 2.0
+shader_parameter/speed = 1.0
+shader_parameter/amplitude1 = 0.3
+shader_parameter/amplitude2 = 0.15
+shader_parameter/wave_count1 = 2.0
+shader_parameter/wave_count2 = 3.0
+shader_parameter/speed1 = 1.0
+shader_parameter/speed2 = 1.5
+
+[node name="Water" type="Node3D" unique_id=1525433509]
+
+[node name="Water" type="MeshInstance3D" parent="." unique_id=1426442920]
+mesh = SubResource("PlaneMesh_ktebk")
+surface_material_override/0 = SubResource("ShaderMaterial_latbv")

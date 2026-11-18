@@ -25,7 +25,7 @@ func _ready() -> void:
 	skin.top_level = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	skin.global_position = global_position
 
 

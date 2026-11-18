@@ -49,11 +49,13 @@ mesh = SubResource("BoxMesh_ktebk")
 
 [node name="StateLabel" type="Label" parent="." unique_id=1516170203]
 unique_name_in_owner = true
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="ComboLabel" type="Label" parent="." unique_id=1100611068]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
