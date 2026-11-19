@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4vhyvdcfahvc"]
 
 [ext_resource type="PackedScene" uid="uid://bpplupp6kx8ye" path="res://Player/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://13b1puvx8g06" path="res://water/v3/water.tscn" id="2_0xm2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -43,7 +44,7 @@ material = SubResource("StandardMaterial3D_ktebk")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=873849799 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(-0.89076835, 0, 0.45445773, 0, 1, 0, -0.45445773, 0, -0.89076835, 0, 2, 0)
+transform = Transform3D(-0.9988427, 0, -0.04809591, 0, 1, 0, 0.04809591, 0, -0.9988427, -8.620251, 2, -11.335483)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1550364199]
 use_collision = true
@@ -135,3 +136,6 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy4" unique_id=2003341173]
 shape = SubResource("CapsuleShape3D_ig7tw")
 metadata/_edit_lock_ = true
+
+[node name="Water" parent="." unique_id=121405312 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.31245, 1.1319165, 0)
